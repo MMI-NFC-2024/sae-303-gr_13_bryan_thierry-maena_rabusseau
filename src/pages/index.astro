@@ -1,21 +1,226 @@
 ---
-import PlotFigure from "../components/PlotFigure.astro";
 import Layout from "../layouts/Layout.astro";
-import * as Plot from "@observablehq/plot";
-import penguins from "../assets/penguins.json";
 ---
 
 <Layout>
-  <h1 class="text-2xl">Test Astro et Plot (Observablehq)</h1>
-  <PlotFigure
-    options={{
-      marks: [
-        Plot.dot(penguins, {
-          x: "culmen_length_mm",
-          y: "culmen_depth_mm",
-          stroke: "species",
-        }),
-      ],
-    }}
-  />
+  <!-- Navbar fixe -->
+  <div class="navbar bg-base-100 fixed top-0 z-50 shadow-lg">
+    <div class="navbar-start">
+      <div class="flex items-center">
+        <img src="/latitudes-logo.svg" alt="Latitudes" class="h-8 mr-3" />
+        <span class="text-lg font-bold">Zones Blanches Culturelles</span>
+      </div>
+    </div>
+    <div class="navbar-center hidden lg:flex">
+      <ul class="menu menu-horizontal px-1">
+        <li><a href="#problematique">1. Problématique</a></li>
+        <li><a href="#donnees">2. Données</a></li>
+        <li><a href="#objectifs">3. Objectifs</a></li>
+        <li><a href="#analyse">4. Analyse</a></li>
+        <li><a href="#solutions">5. Solutions</a></li>
+      </ul>
+    </div>
+    <div class="navbar-end">
+      <div class="dropdown lg:hidden">
+        <label tabindex="0" class="btn btn-ghost">
+          <svg
+            class="w-5 h-5"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M4 6h16M4 12h16M4 18h16"></path>
+          </svg>
+        </label>
+        <ul
+          tabindex="0"
+          class="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52"
+        >
+          <li><a href="#problematique">1. Problématique</a></li>
+          <li><a href="#donnees">2. Données</a></li>
+          <li><a href="#objectifs">3. Objectifs</a></li>
+          <li><a href="#analyse">4. Analyse</a></li>
+          <li><a href="#solutions">5. Solutions</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- Hero Section -->
+  <div
+    class="hero min-h-screen bg-gradient-to-br from-base-200 to-base-300 pt-16"
+  >
+    <div class="hero-content text-center">
+      <div class="max-w-4xl">
+        <h1 class="text-5xl font-bold mb-6 text-base-content">
+          Atlas des Zones Blanches Culturelles
+        </h1>
+        <p class="text-xl mb-8 text-base-content/80 leading-relaxed">
+          Une cartographie inédite des territoires français les moins pourvus en
+          équipements culturels. Découvrez comment patrimoine, musées et
+          monuments historiques se répartissent sur le territoire national.
+        </p>
+        <div class="stats shadow bg-base-100 mb-8">
+          <div class="stat">
+            <div class="stat-title">Départements analysés</div>
+            <div class="stat-value text-2xl">101</div>
+          </div>
+          <div class="stat">
+            <div class="stat-title">Équipements étudiés</div>
+            <div class="stat-value text-2xl">12K+</div>
+          </div>
+          <div class="stat">
+            <div class="stat-title">Population couverte</div>
+            <div class="stat-value text-2xl">67M</div>
+          </div>
+        </div>
+        <a href="#problematique" class="btn btn-primary btn-lg">
+          Découvrir l'étude
+          <svg
+            class="w-5 h-5 ml-2"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
+          </svg>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 1: Problématique -->
+  <section id="problematique" class="py-20 bg-base-100">
+    <div class="container mx-auto px-4">
+      <div class="max-w-4xl mx-auto">
+        <div class="flex items-center mb-8">
+          <div class="badge badge-primary badge-lg mr-4">01</div>
+          <h2 class="text-4xl font-bold">Problématique</h2>
+        </div>
+        <div class="prose prose-lg max-w-none">
+          <p class="text-xl text-base-content/80 mb-6">
+            L'accès à la culture constitue un enjeu majeur d'aménagement du
+            territoire et d'égalité sociale. Alors que certaines régions
+            bénéficient d'une riche offre culturelle, d'autres territoires
+            semblent délaissés, créant de véritables "déserts culturels".
+          </p>
+
+          <div class="alert alert-warning mb-6">
+            <svg
+              class="stroke-current shrink-0 w-6 h-6"
+              fill="none"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L3.732 16.5c-.77.833.192 2.5 1.732 2.5z"
+              ></path>
+            </svg>
+            <span
+              ><strong>Constat :</strong> 23% des Français vivent à plus de 30km
+              du musée le plus proche</span
+            >
+          </div>
+
+          <p>
+            Cette étude vise à identifier et cartographier ces zones blanches
+            culturelles, en se concentrant sur trois types d'équipements
+            patrimoniaux essentiels : les musées, les monuments historiques et
+            les sites archéologiques.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 2: Données -->
+  <section id="donnees" class="py-20 bg-base-200" >
+    <div class="container mx-auto px-4">
+      <div class="max-w-4xl mx-auto">
+        <div class="flex items-center mb-8">
+          <div class="badge badge-primary badge-lg mr-4">02</div>
+          <h2 class="text-4xl font-bold">Données & Méthodologie</h2>
+        </div>
+
+        <div class="grid md:grid-cols-2 gap-8 mb-12">
+          <div class="card bg-base-100 shadow-xl">
+            <div class="card-body">
+              <h3 class="card-title">Sources de données</h3>
+              <ul class="list-disc pl-6 space-y-2">
+                <li>Base Mérimée (Monuments Historiques)</li>
+                <li>Répertoire des Musées de France</li>
+                <li>Atlas archéologique national</li>
+                <li>Données INSEE (population)</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="card bg-base-100 shadow-xl">
+            <div class="card-body">
+              <h3 class="card-title">Indicateurs calculés</h3>
+              <ul class="list-disc pl-6 space-y-2">
+                <li>Densité d'équipements par habitant</li>
+                <li>Distance moyenne d'accessibilité</li>
+                <li>Taux de couverture territoriale</li>
+                <li>Indice de diversité culturelle</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- Placeholder pour première visualisation -->
+        <div class="card bg-base-100 shadow-xl">
+          <div class="card-body">
+            <h3 class="card-title mb-4">
+              Répartition des équipements culturels par type
+            </h3>
+            <div
+              class="h-96 bg-base-200 rounded-lg flex items-center justify-center"
+            >
+              <span class="text-base-content/60"
+                >[Visualisation 1 - Graphique de répartition]</span
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Sections suivantes à développer -->
+  <div class="py-20 bg-base-100 text-center">
+    <div class="container mx-auto px-4">
+      <p class="text-lg text-base-content/60">
+        Sections suivantes : Objectifs, Analyse (avec cartes et graphiques),
+        Solutions...
+      </p>
+      <p class="text-sm text-base-content/40 mt-2">
+        Structure prête pour intégrer tes 4 visualisations Plot/Leaflet
+      </p>
+    </div>
+  </div>
 </Layout>
+
+<style>
+  html {
+    scroll-behavior: smooth;
+  }
+
+  .navbar a {
+    transition: all 0.2s ease;
+  }
+
+  .navbar a:hover {
+    transform: translateY(-1px);
+  }
+</style>
