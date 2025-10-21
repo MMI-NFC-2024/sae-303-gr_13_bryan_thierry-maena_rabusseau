@@ -61,7 +61,7 @@ import Layout from "../layouts/Layout.astro";
         </h1>
         <p class="text-xl mb-8 text-base-content/80 leading-relaxed">
           Une cartographie inédite des territoires français les moins pourvus en
-          équipements culturels. Découvrez comment patrimoine, musées et
+          patrimoines culturels. Découvrez comment patrimoine, musées et
           monuments historiques se répartissent sur le territoire national.
         </p>
         <div class="stats shadow bg-base-100 mb-8">
@@ -127,8 +127,9 @@ import Layout from "../layouts/Layout.astro";
               ></path>
             </svg>
             <span
-              ><strong>Constat :</strong> 23% des Français vivent à plus de 30km
-              du musée le plus proche</span
+              ><strong>Constat :</strong> Près de 40 % des habitants des territoires
+              ruraux ne bénéficient pas d'un musée ou d'un lieu d'exposition de patrimoine
+              dans leur commune.</span
             >
           </div>
 
@@ -144,7 +145,7 @@ import Layout from "../layouts/Layout.astro";
   </section>
 
   <!-- Section 2: Données -->
-  <section id="donnees" class="py-20 bg-base-200" >
+  <section id="donnees" class="py-20 bg-base-200">
     <div class="container mx-auto px-4">
       <div class="max-w-4xl mx-auto">
         <div class="flex items-center mb-8">
@@ -157,9 +158,8 @@ import Layout from "../layouts/Layout.astro";
             <div class="card-body">
               <h3 class="card-title">Sources de données</h3>
               <ul class="list-disc pl-6 space-y-2">
-                <li>Base Mérimée (Monuments Historiques)</li>
-                <li>Répertoire des Musées de France</li>
-                <li>Atlas archéologique national</li>
+                <li>Base de données BASILIC</li>
+                <li>Département et intercommunalités</li>
                 <li>Données INSEE (population)</li>
               </ul>
             </div>
@@ -167,12 +167,11 @@ import Layout from "../layouts/Layout.astro";
 
           <div class="card bg-base-100 shadow-xl">
             <div class="card-body">
-              <h3 class="card-title">Indicateurs calculés</h3>
+              <h3 class="card-title">Types d'analyses</h3>
               <ul class="list-disc pl-6 space-y-2">
-                <li>Densité d'équipements par habitant</li>
-                <li>Distance moyenne d'accessibilité</li>
-                <li>Taux de couverture territoriale</li>
-                <li>Indice de diversité culturelle</li>
+                <li>Ratio de lieux culturels (patrimoniaux) pour 10 000 habitants par EPCI</li>
+                <li>Visualisation comparative des départements : Max vs Min Patrimoine</li>
+                <li>Visualisation interactive : les régions les moins dotées en patrimoine</li>
               </ul>
             </div>
           </div>
