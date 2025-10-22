@@ -1,0 +1,224 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import Donuts from "../../components/Donuts.astro";
+import CartePatrimoine from "../../components/CartePatrimoine.astro";
+import RatioDoubs from "../../components/RatioDoubs.astro";
+---
+
+<Layout>
+  <div class="min-h-screen bg-base-200">
+    <!-- Header -->
+    <div class="navbar bg-base-100 shadow-lg sticky top-0 z-50">
+      <div class="navbar-start">
+        <a href="/" class="btn btn-ghost">
+          <svg
+            class="w-5 h-5 mr-2"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
+          </svg>
+          Retour
+        </a>
+      </div>
+      <div class="navbar-center">
+        <h1 class="text-xl font-bold">Le diagnostic national</h1>
+      </div>
+      <div class="navbar-end">
+        <div class="badge badge-lg">Mode Iframe</div>
+      </div>
+    </div>
+
+    <div class="flex ">
+     
+      <aside class="w-64 bg-base-100 shadow-lg overflow-y-auto">
+        <ul class="menu p-4 gap-2">
+          <li>
+            <a href="#viz1" class="menu-item active">
+              <svg
+                class="w-5 h-5"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"
+                ></path>
+              </svg>
+              Densité EPCI Doubs
+            </a>
+          </li>
+          <li>
+            <a href="#viz2" class="menu-item">
+              <svg
+                class="w-5 h-5"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M11 3.055A9.001 9.001 0 1020.945 13H11V3.055z"
+                ></path>
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M20.488 9H15V3.512A9.025 9.025 0 0120.488 9z"
+                ></path>
+              </svg>
+              Régions moins dotées
+            </a>
+          </li>
+        
+        </ul>
+      </aside>
+
+      <!-- Contenu principal -->
+      <main class="flex-1 overflow-y-auto">
+        <div class="p-8 space-y-12">
+          <!-- Visualisation 1 -->
+          <section id="viz1" class="card bg-base-100 shadow-xl">
+            <div class="card-body">
+              <h2 class="card-title text-2xl mb-4">
+                Densité patrimoniale par EPCI dans le Doubs
+              </h2>
+              <p class="text-base-content/80 mb-6">
+                Cette visualisation montre la répartition des équipements
+                culturels dans les intercommunalités du département du Doubs.
+              </p>
+              <div class="bg-base-200 rounded-lg p-4">
+                <RatioDoubs />
+              </div>
+              <div class="alert bg-primary text-primary-content mt-4">
+                <svg
+                  class="stroke-current shrink-0 w-6 h-6"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                  ></path>
+                </svg>
+                <div>
+                  <p class="font-semibold">Observation clé</p>
+                  <p class="text-sm">
+                    La majorité des EPCI du Doubs présentent moins de 2
+                    équipements patrimoniaux pour 10 000 habitants.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- Visualisation 2 -->
+          <section id="viz2" class="card bg-base-100 shadow-xl">
+            <div class="card-body">
+              <h2 class="card-title text-2xl mb-4">
+                Les régions où le patrimoine est le plus "oublié"
+              </h2>
+              <p class="text-base-content/80 mb-6">
+                Analyse comparative des régions françaises selon leur dotation
+                en patrimoine culturel.
+              </p>
+              <div class="bg-base-200 rounded-lg p-4 flex justify-center">
+                <Donuts />
+              </div>
+              <div class="alert bg-primary text-primary-content mt-4">
+                <svg
+                  class="stroke-current shrink-0 w-6 h-6"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                  ></path>
+                </svg>
+                <div>
+                  <p class="font-semibold">Observation clé</p>
+                  <p class="text-sm">
+                    Certaines régions comme les Pays de la Loire ou le
+                    Centre-Val de Loire apparaissent en retrait, révélant une
+                    fracture territoriale nette.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          
+</Layout>
+
+<style>
+  .menu-item {
+    transition: all 0.2s ease;
+  }
+
+  .menu-item.active {
+    background-color: hsl(var(--s));
+    color: hsl(var(--sc));
+  }
+
+  .menu-item:hover {
+    background-color: hsl(var(--s) / 0.1);
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+</style>
+
+<script>
+  // Gestion du menu actif selon le scroll
+  const menuItems = document.querySelectorAll(".menu-item");
+  const sections = document.querySelectorAll("section[id^='viz']");
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          const id = entry.target.getAttribute("id");
+          menuItems.forEach((item) => {
+            item.classList.remove("active");
+            if (item.getAttribute("href") === `#${id}`) {
+              item.classList.add("active");
+            }
+          });
+        }
+      });
+    },
+    {
+      threshold: 0.5,
+    }
+  );
+
+  sections.forEach((section) => observer.observe(section));
+
+  // Gestion du clic sur les items du menu
+  menuItems.forEach((item) => {
+    item.addEventListener("click", function (this: HTMLAnchorElement, e) {
+      e.preventDefault();
+      const targetId = this.getAttribute("href")?.substring(1);
+      const targetSection = document.getElementById(targetId || "");
+      if (targetSection) {
+        targetSection.scrollIntoView({ behavior: "smooth" });
+      }
+    });
+  });
+</script>

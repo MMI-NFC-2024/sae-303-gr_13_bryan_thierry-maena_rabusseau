@@ -13,7 +13,6 @@ import RatioDoubs from "../components/RatioDoubs.astro";
   <div class="navbar bg-base-100 fixed top-0 z-50 shadow-lg">
     <div class="navbar-start">
       <div class="flex items-center">
-        <img src="/latitudes-logo.svg" alt="Latitudes" class="h-8 mr-3" />
         <span class="text-lg font-bold">Zones Blanches Culturelles</span>
       </div>
     </div>
@@ -235,11 +234,47 @@ import RatioDoubs from "../components/RatioDoubs.astro";
   <section id="analyse" class="py-20 bg-base-200">
     <div class="container mx-auto px-4">
       <div class="mx-auto">
-        <div class="flex items-center mb-8">
-          <div class="badge badge-secondary badge-lg mr-4">03</div>
-          <h2 class="text-4xl font-bold">
-            Le Diagnostic National : Où se concentre le patrimoine ?
-          </h2>
+        <div class="flex items-center justify-between mb-8 flex-wrap gap-4">
+          <div class="flex items-center">
+            <div class="badge badge-secondary badge-lg mr-4">03</div>
+            <h2 class="text-4xl font-bold">
+              Le diagnostic national : où se concentre le patrimoine ?
+            </h2>
+          </div>
+          <div class="flex gap-2">
+            <a href="/visualisations/diagnostic-iframe" class="btn btn-outline btn-lg">
+              <svg
+                class="w-5 h-5 mr-2"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
+                ></path>
+              </svg>
+              Mode Iframe
+            </a>
+            <a href="/visualisations/diagnostic-slider" class="btn btn-outline btn-lg">
+              <svg
+                class="w-5 h-5 mr-2"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M8 9l4-4 4 4m0 6l-4 4-4-4"
+                ></path>
+              </svg>
+              Mode Slider
+            </a>
+          </div>
         </div>
 
         <!-- Visualisation 1 : Carte Interactive -->
@@ -250,9 +285,9 @@ import RatioDoubs from "../components/RatioDoubs.astro";
             </h3>
           </div>
 
-          <!-- Grille 2 colonnes : Graphique à gauche, Analyse à droite -->
+          
           <div class="grid lg:grid-cols-2 gap-20 items-start">
-            <!-- Colonne gauche : Zone pour votre graphique -->
+           
             <div class="order-1">
               <div
                 class="flex items-center justify-center border-2 border-dashed border-base-300 rounded bg-base-100"
@@ -276,7 +311,7 @@ import RatioDoubs from "../components/RatioDoubs.astro";
               </div>
             </div>
 
-            <!-- Colonne droite : Analyse et texte descriptif -->
+         
             <div class="order-2">
               <div class="prose prose-lg max-w-none">
                 <h4 class="text-xl font-semibold mb-3">Analyse</h4>
@@ -312,10 +347,10 @@ import RatioDoubs from "../components/RatioDoubs.astro";
         <!-- visualisation 2   -->
         <div class="mb-16">
           <div class="mb-6">
-            <h3 class="text-2xl font-bold">Le Poids des Régions "Oubliées"</h3>
+            <h3 class="text-2xl font-bold">Le poids des régions "oubliées"</h3>
           </div>
           <div class="grid lg:grid-cols-2 gap-20 items-start">
-            <!-- Colonne gauche : Zone pour votre graphique -->
+           
             <div class="order-2">
               <div
                 class="flex items-center justify-center border-2 border-dashed border-base-300 rounded bg-base-100"
@@ -339,13 +374,13 @@ import RatioDoubs from "../components/RatioDoubs.astro";
               </div>
             </div>
 
-            <!-- Colonne droite : Analyse et texte descriptif -->
+        
             <div class="order-1">
               <div class="prose prose-lg max-w-none">
                 <h4 class="text-xl font-semibold mb-3">Analyse</h4>
 
                 <p class="text-base-content/80 mb-4">
-                  Le Donut Chart vient étayer le diagnostic initial de la carte
+                  Le donut chart vient étayer le diagnostic initial de la carte
                   nationale, mais cette fois-ci, il quantifie la faiblesse des
                   régions les moins bien dotées en patrimoine. En isolant le Top
                   5 des régions les moins fournies (comme la Normandie, les Pays
@@ -384,7 +419,7 @@ import RatioDoubs from "../components/RatioDoubs.astro";
         <div class="flex items-center mb-8">
           <div class="badge badge-secondary badge-lg mr-4">04</div>
           <h2 class="text-4xl font-bold">
-            Le Zoom sur le Doubs : Révélation de l'Inégalité d'Accès
+            Le zoom sur le Doubs : révélation de l'inégalité d'accès
           </h2>
         </div>
 
@@ -396,9 +431,9 @@ import RatioDoubs from "../components/RatioDoubs.astro";
             </h3>
           </div>
 
-          <!-- Grille 2 colonnes : Graphique à gauche, Analyse à droite -->
+       
           <div class="grid lg:grid-cols-2 gap-20 items-start">
-            <!-- Colonne gauche : Zone pour votre graphique -->
+       
             <div class="order-1">
               <div
                 class="flex items-center justify-center border-2 border-dashed border-base-300 rounded bg-base-100"
@@ -422,7 +457,6 @@ import RatioDoubs from "../components/RatioDoubs.astro";
               </div>
             </div>
 
-            <!-- Colonne droite : Analyse et texte descriptif -->
             <div class="order-2">
               <div class="prose prose-lg max-w-none">
                 <h4 class="text-xl font-semibold mb-3">Analyse</h4>
@@ -460,12 +494,12 @@ import RatioDoubs from "../components/RatioDoubs.astro";
         <div class="mb-16">
           <div class="mb-6">
             <h3 class="text-2xl font-bold">
-              La Hiérarchie de l'Inégalité : Qui est vraiment sous-doté ?
+              La hiérarchie de l'inégalité : qui est vraiment sous-doté ?
             </h3>
 
-            <!-- Grille 2 colonnes : Analyse à gauche, Graphique à droite -->
+         
             <div class="grid lg:grid-cols-2 gap-20 items-start">
-              <!-- Colonne gauche : Analyse et texte descriptif -->
+          
               <div class="order-1">
                 <div class="prose prose-lg max-w-none">
                   <h4 class="text-xl font-semibold mb-3">Analyse</h4>
@@ -495,7 +529,7 @@ import RatioDoubs from "../components/RatioDoubs.astro";
                 </div>
               </div>
 
-              <!-- Colonne droite : Zone pour votre graphique -->
+      
               <div class="order-2">
                 <div
                   class="flex items-center justify-center border-2 border-dashed border-base-300 rounded bg-base-100"
@@ -526,7 +560,7 @@ import RatioDoubs from "../components/RatioDoubs.astro";
         <div class="flex items-center mb-8">
           <div class="badge badge-secondary badge-lg mr-4">05</div>
           <h2 class="text-4xl font-bold">
-            L'Origine du Manque : La Qualité de l'Offre
+            L'origine du manque : la qualité de l'offre
           </h2>
         </div>
 
@@ -535,9 +569,9 @@ import RatioDoubs from "../components/RatioDoubs.astro";
             <h3 class="text-2xl font-bold">Classement des intercommunalités</h3>
           </div>
 
-          <!-- Grille 2 colonnes : Graphique à gauche, Analyse à droite -->
+        
           <div class="grid lg:grid-cols-2 gap-20 items-start">
-            <!-- Colonne gauche : Zone pour votre graphique -->
+       
             <div class="order-1">
               <div
                 class="flex items-center justify-center border-2 border-dashed border-base-300 rounded bg-base-100"
@@ -561,7 +595,6 @@ import RatioDoubs from "../components/RatioDoubs.astro";
               </div>
             </div>
 
-            <!-- Colonne droite : Analyse et texte descriptif -->
             <div class="order-2">
               <div class="prose prose-lg max-w-none">
                 <h4 class="text-xl font-semibold mb-3">Analyse</h4>
@@ -609,9 +642,9 @@ import RatioDoubs from "../components/RatioDoubs.astro";
               Que reste-t-il hors des métropoles ?
             </h3>
 
-            <!-- Grille 2 colonnes : Analyse à gauche, Graphique à droite -->
+       
             <div class="grid lg:grid-cols-2 gap-20 items-start">
-              <!-- Colonne gauche : Analyse et texte descriptif -->
+        
               <div class="order-1">
                 <div class="prose prose-lg max-w-none">
                   <h4 class="text-xl font-semibold mb-3">Analyse</h4>
@@ -643,7 +676,7 @@ import RatioDoubs from "../components/RatioDoubs.astro";
                 </div>
               </div>
 
-              <!-- Colonne droite : Zone pour votre graphique -->
+         
               <div class="order-2">
                 <div
                   class="flex items-center justify-center border-2 border-dashed border-base-300 rounded bg-base-100"
@@ -672,11 +705,11 @@ import RatioDoubs from "../components/RatioDoubs.astro";
 
         <!-- Section 5: Solutions -->
 
-        <div class="container mx-auto px-4">
+        <!-- <div class="container mx-auto px-4">
           <div class="max-w-4xl mx-auto">
             <div class="flex items-center mb-8">
               <div class="badge badge-secondary badge-lg mr-4">05</div>
-              <h2 class="text-4xl font-bold">Solutions & Recommandations</h2>
+              <h2 class="text-4xl font-bold">Solutions & recommandations</h2>
             </div>
 
             <div class="prose prose-lg max-w-none mb-8">
@@ -685,7 +718,7 @@ import RatioDoubs from "../components/RatioDoubs.astro";
                 ensemble de recommandations stratégiques pour améliorer l'accès
                 au patrimoine culturel dans les zones blanches identifiées.
               </p>
-            </div>
+            </div> -->
 
             <div class="container mx-auto px-4 text-center">
               <div class="max-w-3xl mx-auto">
