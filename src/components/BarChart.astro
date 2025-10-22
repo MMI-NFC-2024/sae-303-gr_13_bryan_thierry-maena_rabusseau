@@ -1,0 +1,272 @@
+---
+
+---
+
+<div class="bar-chart p-4">
+  <h3 class="text-xl font-semibold mb-4">Classement des EPCI du Doubs</h3>
+
+  <!-- Toggle métrique avec radio buttons -->
+  <div class="form-control w-full max-w-md mb-4">
+    <label class="label">
+      <span class="label-text">Sélectionner la métrique de classement</span>
+    </label>
+    <div class="flex flex-col gap-2">
+      <label class="label cursor-pointer justify-start gap-3">
+        <input
+          type="radio"
+          name="metrique-radio"
+          value="Ratio / 10K hab."
+          class="radio radio-primary"
+          checked
+        />
+        <span class="label-text">Ratio / 10K hab.</span>
+      </label>
+      <label class="label cursor-pointer justify-start gap-3">
+        <input
+          type="radio"
+          name="metrique-radio"
+          value="Nombre Brut de Lieux"
+          class="radio radio-primary"
+        />
+        <span class="label-text">Nombre Brut de Lieux</span>
+      </label>
+    </div>
+  </div>
+
+  <div
+    id="bar-chart-container"
+    class="rounded-lg p-4 min-h-96 flex items-center justify-center"
+  >
+    <span class="loading loading-spinner loading-lg"></span>
+    <span class="ml-2">Chargement du graphique...</span>
+  </div>
+</div>
+
+<script>
+  import * as Plot from "@observablehq/plot";
+  import * as d3 from "d3";
+
+  let basilicData, epciGeoJSON;
+  let dataBarDoubsEpci, medianRatioDoubs;
+  let currentMetrique = "Ratio / 10K hab.";
+
+  async function loadData() {
+    try {
+      // Chargement des données
+      [basilicData, epciGeoJSON] = await Promise.all([
+        d3.json("/src/assets/basilic_final.json"),
+        d3.json("/src/assets/intercomunalites.json"),
+      ]);
+
+      console.log(
+        `✅ Données chargées: ${basilicData.length} lieux, ${epciGeoJSON.features.length} EPCI`
+      );
+
+      prepareBarData();
+    } catch (error) {
+      console.error("❌ Erreur lors du chargement:", error);
+      showError(`Erreur de chargement: ${error.message}`);
+    }
+  }
+
+  function prepareBarData() {
+    // Filtrer les lieux du Doubs
+    const lieuxDoubs = basilicData.filter(
+      (item) => item.code_departement === "25"
+    );
+
+    // Compter les lieux par EPCI
+    const lieuParEpciMap = d3.rollup(
+      lieuxDoubs.filter((d) => d.code_insee_epci),
+      (v) => v.length,
+      (d) => d.code_insee_epci
+    );
+
+    // Créer le dataset complet
+    const dataScatterDoubs = Array.from(
+      lieuParEpciMap,
+      ([codeEpci, nombreLieux]) => {
+        const epciFeature = epciGeoJSON.features.find(
+          (f) => String(f.properties.siren_epci) === String(codeEpci)
+        );
+
+        const nomEpci =
+          epciFeature?.properties.nom_epci ||
+          epciFeature?.properties.nom_court ||
+          `EPCI ${codeEpci}`;
+
+        // Calcul du ratio
+        const superficie = epciFeature?.properties.st_area_sh || 10000000;
+        const populationEstimee = Math.max(1000, Math.round(superficie / 5000));
+        const ratio =
+          populationEstimee > 0 ? (nombreLieux / populationEstimee) * 10000 : 0;
+
+        return {
+          code_epci: codeEpci,
+          nom_epci: nomEpci,
+          code_departement: "25",
+          nombre_lieux: nombreLieux,
+          ratio_10k_habitants: ratio,
+          nom_departement: "Doubs",
+        };
+      }
+    ).filter((d) => d.ratio_10k_habitants > 0);
+
+    // Calculer la médiane
+    medianRatioDoubs = d3.median(
+      dataScatterDoubs,
+      (d) => d.ratio_10k_habitants
+    );
+
+    // Sélectionner top 5 et bottom 5 pour le bar chart
+    const epciNonZeroDoubs = dataScatterDoubs
+      .slice()
+      .filter((d) => d.ratio_10k_habitants > 0)
+      .sort((a, b) => b.ratio_10k_habitants - a.ratio_10k_habitants);
+
+    const top5EpciDoubs = epciNonZeroDoubs.slice(0, 5);
+    const bottom5EpciDoubs = epciNonZeroDoubs.slice(-5);
+
+    dataBarDoubsEpci = [...top5EpciDoubs, ...bottom5EpciDoubs].sort(
+      (a, b) => a.ratio_10k_habitants - b.ratio_10k_habitants
+    );
+
+    console.log(`📊 EPCI pour bar chart: ${dataBarDoubsEpci.length}`);
+    console.log(`📈 Médiane ratio Doubs: ${medianRatioDoubs?.toFixed(2)}`);
+
+    createBarChart();
+  }
+
+  function createBarChart() {
+    try {
+      if (!dataBarDoubsEpci || dataBarDoubsEpci.length === 0) {
+        showError("Aucune donnée disponible pour le bar chart");
+        return;
+      }
+
+      const isRatio = currentMetrique === "Ratio / 10K hab.";
+      const metricKey = isRatio ? "ratio_10k_habitants" : "nombre_lieux";
+
+      const data = dataBarDoubsEpci.sort((a, b) => b[metricKey] - a[metricKey]);
+
+      const formatEpciLabel = (d) => d.nom_epci;
+      const xLabel = isRatio
+        ? "Ratio de lieux pour 10 000 Hab."
+        : "Nombre total de lieux patrimoniaux";
+      const xDomainMax = d3.max(data, (d) => d[metricKey]) * 1.1;
+      const xTickFormat = isRatio ? ".1f" : "d";
+
+      const title = `Classement des intercommunalités du Doubs par ${
+        isRatio ? "accès (ratio / 10K hab.)" : "volume brut"
+      }`;
+      const subtitle = isRatio
+        ? `Tri par ratio décroissant — Médiane du Doubs : ${medianRatioDoubs.toFixed(2)}`
+        : "Tri par volume brut de lieux décroissant.";
+
+      const plot = Plot.plot({
+        title: title,
+        subtitle: subtitle,
+        width: 900,
+        height: 600,
+        marginTop: 30,
+        marginRight: 60,
+        marginLeft: 350,
+
+        x: {
+          label: xLabel,
+          domain: [0, xDomainMax],
+          grid: true,
+          tickFormat: xTickFormat,
+        },
+        y: {
+          label: "EPCI",
+          domain: data.map(formatEpciLabel),
+          padding: 0.1,
+        },
+
+        color: {
+          type: "linear",
+          scheme: isRatio ? "blues" : "greens",
+          legend: false,
+          range: [0.4, 1],
+        },
+
+        marks: [
+          // Barres
+          Plot.barX(data, {
+            y: formatEpciLabel,
+            x: metricKey,
+            fill: metricKey,
+            tip: true,
+            title: (d) =>
+              `${d.nom_epci} — ${d[metricKey].toFixed(isRatio ? 2 : 0)} ${
+                isRatio ? "/ 10K hab." : "lieux"
+              }`,
+          }),
+
+          // Ligne médiane (seulement pour ratio)
+          ...(isRatio
+            ? [
+                Plot.ruleX([medianRatioDoubs], {
+                  stroke: "black",
+                  strokeWidth: 2,
+                  strokeDasharray: "4,2",
+                  title: `Médiane Doubs: ${medianRatioDoubs.toFixed(2)}`,
+                }),
+              ]
+            : []),
+
+          // Labels des valeurs
+          Plot.text(data, {
+            x: metricKey,
+            y: formatEpciLabel,
+            text: (d) => d[metricKey].toFixed(isRatio ? 1 : 0),
+            dx: 5,
+            textAnchor: "start",
+            fill: "black",
+            fontWeight: "bold",
+          }),
+        ],
+      });
+
+      const container = document.getElementById("bar-chart-container");
+      container.innerHTML = "";
+      container.appendChild(plot);
+
+      console.log(
+        `✅ Bar chart créé avec ${data.length} barres (${currentMetrique})`
+      );
+    } catch (error) {
+      console.error("❌ Erreur bar chart:", error);
+      showError(`Erreur d'affichage: ${error.message}`);
+    }
+  }
+
+  function showError(message) {
+    const container = document.getElementById("bar-chart-container");
+    container.innerHTML = `<div class="alert alert-error"><span>${message}</span></div>`;
+  }
+
+  async function init() {
+    await loadData();
+
+    // Event listeners pour les boutons radio
+    document
+      .querySelectorAll('input[name="metrique-radio"]')
+      .forEach((radio) => {
+        radio.addEventListener("change", (e) => {
+          if (e.target.checked) {
+            currentMetrique = e.target.value;
+            console.log(`🎯 Changement de métrique: ${currentMetrique}`);
+            createBarChart();
+          }
+        });
+      });
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", init);
+  } else {
+    init();
+  }
+</script>

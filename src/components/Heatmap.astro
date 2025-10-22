@@ -1,0 +1,205 @@
+---
+
+---
+
+<div class="heatmap p-4">
+  <h3 class="text-xl font-semibold mb-4">
+    Répartition des types de patrimoine par EPCI dans le Doubs
+  </h3>
+
+  <div
+    id="heatmap-container"
+    class="rounded-lg p-4 min-h-96 flex items-center justify-center"
+  >
+    <span class="loading loading-spinner loading-lg"></span>
+    <span class="ml-2">Chargement de la heatmap...</span>
+  </div>
+</div>
+
+<script>
+  import * as Plot from "@observablehq/plot";
+  import * as d3 from "d3";
+
+  let basilicData, epciGeoJSON;
+  let donneesHeatmapAvecNoms;
+
+  // Fonction pour catégoriser les types (comme dans Observable)
+  function categoriserType(type_lieu) {
+    if (!type_lieu) return "Autre";
+
+    const type = type_lieu.toLowerCase();
+
+    if (type.includes("musée")) return "Musées";
+    if (type.includes("monument")) return "Monuments";
+    if (type.includes("archéologique") || type.includes("site archéo"))
+      return "Sites archéologiques";
+    if (type.includes("archives")) return "Archives";
+    if (type.includes("espace protégé")) return "Espaces protégés";
+
+    return "Autre";
+  }
+
+  async function loadData() {
+    try {
+      // Chargement des données
+      [basilicData, epciGeoJSON] = await Promise.all([
+        d3.json("/src/assets/basilic_final.json"),
+        d3.json("/src/assets/intercomunalites.json"),
+      ]);
+
+      console.log(
+        `✅ Données chargées: ${basilicData.length} lieux, ${epciGeoJSON.features.length} EPCI`
+      );
+
+      prepareHeatmapData();
+    } catch (error) {
+      console.error("❌ Erreur lors du chargement:", error);
+      showError(`Erreur de chargement: ${error.message}`);
+    }
+  }
+
+  function prepareHeatmapData() {
+    // Filtrer les lieux du Doubs et ajouter la catégorisation
+    const basilicAvecCategorie = basilicData
+      .filter((d) => d.code_departement === "25")
+      .map((d) => ({
+        ...d,
+        categorie_patrimoine: categoriserType(d.type_lieu),
+      }));
+
+    console.log(
+      `📍 Lieux du Doubs avec catégorie: ${basilicAvecCategorie.length}`
+    );
+
+    // Créer un annuaire des noms EPCI
+    const epciNoms = Object.fromEntries(
+      epciGeoJSON.features.map((f) => [
+        String(f.properties.siren_epci),
+        f.properties.nom_epci ||
+          f.properties.nom_court ||
+          `EPCI ${f.properties.siren_epci}`,
+      ])
+    );
+
+    // Créer les données heatmap : compter par EPCI et catégorie
+    const donneesHeatmapRaw = d3.rollup(
+      basilicAvecCategorie.filter((d) => d.code_insee_epci),
+      (v) => v.length,
+      (d) => d.code_insee_epci,
+      (d) => d.categorie_patrimoine
+    );
+
+    // Convertir en format plat avec noms EPCI
+    donneesHeatmapAvecNoms = Array.from(
+      donneesHeatmapRaw,
+      ([epci, categories]) => {
+        return Array.from(categories, ([categorie, count]) => ({
+          code_insee_epci: epci,
+          nom_epci: epciNoms[epci] || `EPCI ${epci}`,
+          categorie: categorie,
+          nombre: count,
+        }));
+      }
+    ).flat();
+
+    console.log(
+      `📊 Données heatmap: ${donneesHeatmapAvecNoms.length} cellules`
+    );
+    console.log(`🏷️ Catégories uniques:`, [
+      ...new Set(donneesHeatmapAvecNoms.map((d) => d.categorie)),
+    ]);
+    console.log(
+      `🏛️ EPCI uniques:`,
+      [...new Set(donneesHeatmapAvecNoms.map((d) => d.nom_epci))].length
+    );
+
+    createHeatmap();
+  }
+
+  function createHeatmap() {
+    try {
+      if (!donneesHeatmapAvecNoms || donneesHeatmapAvecNoms.length === 0) {
+        showError("Aucune donnée disponible pour la heatmap");
+        return;
+      }
+
+      const plot = Plot.plot({
+        title:
+          "Répartition des types de patrimoine par EPCI (établissement public de coopération intercommunale).",
+        width: 1100,
+        height: 600,
+        marginBottom: 100,
+        marginLeft: 330,
+
+        x: {
+          label: "Type de patrimoine",
+          tickRotate: -45,
+        },
+
+        y: {
+          label: null,
+          domain: [
+            ...new Set(donneesHeatmapAvecNoms.map((d) => d.nom_epci)),
+          ].sort(),
+        },
+
+        color: {
+          type: "sequential",
+          scheme: "BuGn",
+          legend: true,
+          label: "Nombre de lieux",
+        },
+
+        marks: [
+          // Cellules de la heatmap
+          Plot.cell(donneesHeatmapAvecNoms, {
+            x: "categorie",
+            y: "nom_epci",
+            fill: "nombre",
+            tip: true,
+            title: (d) => `${d.nom_epci}\n${d.categorie}: ${d.nombre} lieu(x)`,
+          }),
+
+          // Texte sur les cellules
+          Plot.text(donneesHeatmapAvecNoms, {
+            x: "categorie",
+            y: "nom_epci",
+            text: (d) => d.nombre,
+            fill: (d, i, data) => {
+              const maxNombre = d3.max(data, (item) => item.nombre) || 1;
+              return d.nombre > maxNombre * 0.5 ? "white" : "black";
+            },
+            fontSize: 11,
+            fontWeight: "bold",
+          }),
+        ],
+      });
+
+      const container = document.getElementById("heatmap-container");
+      container.innerHTML = "";
+      container.appendChild(plot);
+
+      console.log(
+        `✅ Heatmap créée avec ${donneesHeatmapAvecNoms.length} cellules`
+      );
+    } catch (error) {
+      console.error("❌ Erreur heatmap:", error);
+      showError(`Erreur d'affichage: ${error.message}`);
+    }
+  }
+
+  function showError(message) {
+    const container = document.getElementById("heatmap-container");
+    container.innerHTML = `<div class="alert alert-error"><span>${message}</span></div>`;
+  }
+
+  async function init() {
+    await loadData();
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", init);
+  } else {
+    init();
+  }
+</script>
