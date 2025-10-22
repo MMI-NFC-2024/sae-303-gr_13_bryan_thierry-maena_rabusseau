@@ -55,28 +55,14 @@ import Layout from "../layouts/Layout.astro";
     <div class="hero-content text-center">
       <div class="max-w-4xl">
         <h1 class="text-5xl font-bold mb-6 text-base-content">
-          Atlas des Zones Blanches Culturelles
+          Analyse de la dotation territoriale en patrimoine et musées
         </h1>
         <p class="text-xl mb-8 text-base-content/80 leading-relaxed">
           Une cartographie inédite des territoires français les moins pourvus en
           patrimoines culturels. Découvrez comment patrimoine, musées et
           monuments historiques se répartissent sur le territoire national.
         </p>
-        <div class="stats shadow bg-base-100 mb-8">
-          <div class="stat">
-            <div class="stat-title">Départements analysés</div>
-            <div class="stat-value text-2xl">101</div>
-          </div>
-          <div class="stat">
-            <div class="stat-title">Équipements étudiés</div>
-            <div class="stat-value text-2xl">12K+</div>
-          </div>
-          <div class="stat">
-            <div class="stat-title">Population couverte</div>
-            <div class="stat-value text-2xl">67M</div>
-          </div>
-        </div>
-        <a href="#problematique" class="btn btn-primary btn-lg">
+        <a href="#problematique" class="btn btn-secondary btn-lg">
           Découvrir l'étude
           <svg
             class="w-5 h-5 ml-2"
@@ -100,7 +86,7 @@ import Layout from "../layouts/Layout.astro";
     <div class="container mx-auto px-4">
       <div class="max-w-4xl mx-auto">
         <div class="flex items-center mb-8">
-          <div class="badge badge-primary badge-lg mr-4">01</div>
+          <div class="badge badge-secondary badge-lg mr-4">01</div>
           <h2 class="text-4xl font-bold">Problématique</h2>
         </div>
         <h2 class="text-4xl font-bold mr-4 mb-6">
@@ -153,7 +139,7 @@ import Layout from "../layouts/Layout.astro";
     <div class="container mx-auto px-4">
       <div class="max-w-4xl mx-auto">
         <div class="flex items-center mb-8">
-          <div class="badge badge-primary badge-lg mr-4">02</div>
+          <div class="badge badge-secondary badge-lg mr-4">02</div>
           <h2 class="text-4xl font-bold">Objectifs de l'étude</h2>
         </div>
 
@@ -249,13 +235,16 @@ import Layout from "../layouts/Layout.astro";
 
         <div class="alert alert-info mt-8">
           <svg
-            class="stroke-current shrink-0 w-6 h-6"
+            class="currentColor shrink-0 w-6 h-6"
             fill="none"
+             stroke="currentColor"
             viewBox="0 0 24 24"
           >
             <path
+            
               stroke-linecap="round"
               stroke-linejoin="round"
+             
               stroke-width="2"
               d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
             ></path>
@@ -275,7 +264,7 @@ import Layout from "../layouts/Layout.astro";
     <div class="container mx-auto px-4">
       <div class="max-w-6xl mx-auto">
         <div class="flex items-center mb-8">
-          <div class="badge badge-secondary badge-lg mr-4">04</div>
+          <div class="badge badge-secondary badge-lg mr-4">03</div>
           <h2 class="text-4xl font-bold">Analyse & Visualisations</h2>
         </div>
 
@@ -400,57 +389,6 @@ import Layout from "../layouts/Layout.astro";
         </div>
 
   
-
-        <!-- Synthèse des résultats -->
-        <div
-          class="card bg-gradient-to-br from-primary/10 to-secondary/10 shadow-xl"
-        >
-          <div class="card-body">
-            <h3 class="card-title text-2xl mb-4">Résultats clés</h3>
-            <div class="grid md:grid-cols-2 gap-6">
-              <div>
-                <h4 class="font-bold mb-2 flex items-center">
-                  <svg
-                    class="w-5 h-5 mr-2 text-error"
-                    fill="currentColor"
-                    viewBox="0 0 20 20"
-                  >
-                    <path
-                      fill-rule="evenodd"
-                      d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z"
-                      clip-rule="evenodd"></path>
-                  </svg>
-                  Inégalités majeures
-                </h4>
-                <ul class="list-disc pl-6 space-y-2 text-base-content/80">
-                  <li>A METTRE</li>
-                  <li>A METTRE</li>
-                  <li>A METTRE</li>
-                </ul>
-              </div>
-              <div>
-                <h4 class="font-bold mb-2 flex items-center">
-                  <svg
-                    class="w-5 h-5 mr-2 text-success"
-                    fill="currentColor"
-                    viewBox="0 0 20 20"
-                  >
-                    <path
-                      fill-rule="evenodd"
-                      d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                      clip-rule="evenodd"></path>
-                  </svg>
-                  Opportunités identifiées
-                </h4>
-                <ul class="list-disc pl-6 space-y-2 text-base-content/80">
-                  <li>A METTRE</li>
-                  <li>A METTRE</li>
-                  <li>A METTRE</li>
-                </ul>
-              </div>
-            </div>
-          </div>
-        </div>
       </div>
     </div>
   </section>
