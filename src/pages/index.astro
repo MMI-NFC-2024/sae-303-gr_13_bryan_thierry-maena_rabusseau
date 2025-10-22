@@ -19,9 +19,8 @@ import RatioDoubs from "../components/RatioDoubs.astro";
     <div class="navbar-center hidden lg:flex">
       <ul class="menu menu-horizontal px-1">
         <li><a href="#problematique">1. Problématique</a></li>
-        <li><a href="#objectifs">2. Objectifs</a></li>
-        <li><a href="#analyse">3. Analyse</a></li>
-        <li><a href="#solutions">4. Solutions</a></li>
+        <li><a href="#analyse">2. Analyse</a></li>
+        <li><a href="#solutions">3. Solutions</a></li>
       </ul>
     </div>
     <div class="navbar-end">
@@ -55,7 +54,7 @@ import RatioDoubs from "../components/RatioDoubs.astro";
 
   <!-- Hero Section -->
   <div
-    class="hero min-h-screen bg-gradient-to-br from-base-200 to-base-300 pt-16"
+    class="hero min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 pt-16"
   >
     <div class="hero-content text-center">
       <div class="max-w-4xl">
@@ -86,163 +85,190 @@ import RatioDoubs from "../components/RatioDoubs.astro";
     </div>
   </div>
 
-  <!-- Section 1: Problématique -->
+  <!-- Section 1: Introduction -->
   <section id="problematique" class="py-20 bg-base-100">
     <div class="container mx-auto px-4">
-      <div class="max-w-4xl mx-auto">
+      <div class="mx-auto">
         <div class="flex items-center mb-8">
           <div class="badge badge-secondary badge-lg mr-4">01</div>
           <h2 class="text-4xl font-bold">Introduction</h2>
         </div>
         <div class="prose prose-lg max-w-none">
           <p class="text-xl text-base-content/80 mb-6">
-            La France est un pays riche de son histoire, mais cette richesse
-            est-elle accessible à tous ? Notre étude analyse la répartition des
-            monuments, musées, sites archéologiques et autres lieux culturels
-            pour comprendre comment la dotation patrimoniale se répartit sur le
-            territoire.
+            La France est reconnue mondialement pour son patrimoine culturel
+            exceptionnel. Châteaux, musées, monuments historiques et sites
+            archéologiques jalonnent son territoire, témoignant de siècles
+            d'histoire et de création artistique. Cette richesse patrimoniale
+            constitue un atout majeur pour l'attractivité et l'identité du pays.
           </p>
-          <p class="text-xl text-base-content/80 mb-6 font-bold">
-            L'enjeu est simple : l'accès à la culture est-il juste, ou est-il
-            réservé aux grandes métropoles ?
-          </p>
-        </div>
-      </div>
-    </div>
-  </section>
 
-  <!-- Section 2: Objectifs -->
-  <section id="objectifs" class="py-20 bg-base-100">
-    <div class="container mx-auto px-4">
-      <div class="max-w-4xl mx-auto">
-        <div class="flex items-center mb-8">
-          <div class="badge badge-secondary badge-lg mr-4">02</div>
-          <h2 class="text-4xl font-bold">Objectifs de l'étude</h2>
-        </div>
-
-        <div class="prose prose-lg max-w-none mb-8">
           <p class="text-xl text-base-content/80 mb-6">
-            Cette recherche vise à éclairer les décideurs publics et les acteurs
-            culturels sur les inégalités territoriales d'accès au patrimoine,
-            afin de favoriser un aménagement plus équitable du territoire.
+            Cependant, derrière cette image d'abondance culturelle se cache une
+            réalité plus contrastée. Tous les territoires français
+            bénéficient-ils équitablement de cette richesse patrimoniale ? Les
+            habitants des zones rurales ont-ils le même accès à la culture que
+            ceux des grandes métropoles ?
+          </p>
+
+          <p class="text-xl text-base-content/80 mb-6 font-bold">
+            Notre étude révèle les inégalités territoriales en matière d'accès
+            au patrimoine culturel et met en lumière l'existence de véritables
+            "zones blanches culturelles" sur le territoire français.
+          </p>
+
+          <p class="text-xl text-base-content/80 mb-6">
+            À travers l'analyse de données nationales et une étude de cas
+            approfondie du département du Doubs, nous explorons la répartition
+            géographique des lieux culturels et patrimoniaux. Cette recherche
+            vise à éclairer les décideurs publics sur les déséquilibres
+            territoriaux et à proposer des pistes pour un aménagement culturel
+            plus équitable.
           </p>
         </div>
+      </div>
+    </div>
+    <div class="container mx-auto px-4 mt-20">
+      <div class="max-w-6xl mx-auto">
+        <div class="text-center mb-12">
+          <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6">
+            <div class="card bg-base-100 shadow-lg">
+              <div class="card-body text-center p-6">
+                <div class="mb-4">
+                  <div
+                    class="w-16 h-16 mx-auto bg-primary/10 rounded-full flex items-center justify-center"
+                  >
+                    <svg
+                      class="w-8 h-8 text-primary"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"
+                      ></path>
+                    </svg>
+                  </div>
+                </div>
+                <h3 class="card-title text-lg mb-2 justify-center">Analyser</h3>
+                <p class="text-sm text-base-content/70">
+                  Quantifier la répartition des lieux culturels sur le
+                  territoire français
+                </p>
+              </div>
+            </div>
 
-        <div class="grid md:grid-cols-2 gap-6">
-          <div class="card bg-base-200 shadow-xl">
-            <div class="card-body">
-              <div class="flex items-start">
-                <div
-                  class="badge-lg mr-3 mt-1 h-10 w-10 flex items-center justify-center"
-                >
+            <div class="card bg-base-100 shadow-lg">
+              <div class="card-body text-center p-6">
+                <div class="mb-4">
+                  <div
+                    class="w-16 h-16 mx-auto bg-secondary/10 rounded-full flex items-center justify-center"
+                  >
+                    <svg
+                      class="w-8 h-8 text-secondary"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7"
+                      ></path>
+                    </svg>
+                  </div>
                 </div>
-                <div>
-                  <h3 class="card-title text-lg mb-2">Analyser</h3>
-                  <p class="text-base-content/80">
-                    Étudier la répartition des lieux culturels et patrimoniaux
-                    sur le territoire français à travers des indicateurs
-                    quantitatifs.
-                  </p>
+                <h3 class="card-title text-lg mb-2 justify-center">
+                  Cartographier
+                </h3>
+                <p class="text-sm text-base-content/70">
+                  Visualiser les zones de concentration et les déserts culturels
+                </p>
+              </div>
+            </div>
+
+            <div class="card bg-base-100 shadow-lg">
+              <div class="card-body text-center p-6">
+                <div class="mb-4">
+                  <div
+                    class="w-16 h-16 mx-auto bg-accent/10 rounded-full flex items-center justify-center"
+                  >
+                    <svg
+                      class="w-8 h-8 text-accent"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M3 6l3 1m0 0l-3 9a5.002 5.002 0 006.001 0M6 7l3 9M6 7l6-2m6 2l3-1m-3 1l-3 9a5.002 5.002 0 006.001 0M18 7l3 9m-3-9l-6-2m0-2v2m0 16V5m0 16l3-1m-3 1l-3-1"
+                      ></path>
+                    </svg>
+                  </div>
                 </div>
+                <h3 class="card-title text-lg mb-2 justify-center">Comparer</h3>
+                <p class="text-sm text-base-content/70">
+                  Identifier les écarts entre territoires favorisés et
+                  défavorisés
+                </p>
+              </div>
+            </div>
+
+            <div class="card bg-base-100 shadow-lg">
+              <div class="card-body text-center p-6">
+                <div class="mb-4">
+                  <div
+                    class="w-16 h-16 mx-auto bg-info/10 rounded-full flex items-center justify-center"
+                  >
+                    <svg
+                      class="w-8 h-8 text-info"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"
+                      ></path>
+                    </svg>
+                  </div>
+                </div>
+                <h3 class="card-title text-lg mb-2 justify-center">Évaluer</h3>
+                <p class="text-sm text-base-content/70">
+                  Mesurer l'accessibilité culturelle par habitant
+                </p>
               </div>
             </div>
           </div>
-
-          <div class="card bg-base-200 shadow-xl">
-            <div class="card-body">
-              <div class="flex items-start">
-                <div
-                  class="badge-lg mr-3 mt-1 h-10 w-10 flex items-center justify-center"
-                >
-                </div>
-                <div>
-                  <h3 class="card-title text-lg mb-2">Cartographier</h3>
-                  <p class="text-base-content/80">
-                    Visualiser le nombre de lieux patrimoniaux (musées,
-                    monuments, sites) par département et par EPCI, notamment via
-                    une carte interactive de la France.
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="card bg-base-200 shadow-xl">
-            <div class="card-body">
-              <div class="flex items-start">
-                <div
-                  class="badge-lg mr-3 mt-1 h-10 w-10 flex items-center justify-center"
-                >
-                </div>
-                <div>
-                  <h3 class="card-title text-lg mb-2">Comparer</h3>
-                  <p class="text-base-content/80">
-                    Mettre en évidence les écarts entre territoires en comparant
-                    les départements les plus et les moins dotés en patrimoine
-                    culturel.
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="card bg-base-200 shadow-xl">
-            <div class="card-body">
-              <div class="flex items-start">
-                <div
-                  class="badge-lg mr-3 mt-1 h-10 w-10 flex items-center justify-center"
-                >
-                </div>
-                <div>
-                  <h3 class="card-title text-lg mb-2">Évaluer</h3>
-                  <p class="text-base-content/80">
-                    Calculer le ratio de lieux patrimoniaux pour 10 000
-                    habitants afin de mesurer l’accessibilité culturelle des
-                    populations locales.
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="alert bg-primary text-primary-content mt-8">
-          <svg
-            class="currentColor shrink-0 w-6 h-6"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-            ></path>
-          </svg>
-          <span>
-            <strong>Impact attendu :</strong> Fournir une base de réflexion pour
-            orienter les politiques publiques culturelles vers une répartition plus
-            équilibrée du patrimoine sur le territoire français.
-          </span>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Section 4: Analyse -->
-  <section id="analyse" class="py-20 bg-base-200">
+  <!-- Section 2: Analyse -->
+  <section id="analyse" class="py-20 bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50">
     <div class="container mx-auto px-4">
       <div class="mx-auto">
-        <div class="flex items-center justify-between mb-8 flex-wrap gap-4">
-          <div class="flex items-center">
-            <div class="badge badge-secondary badge-lg mr-4">03</div>
-            <h2 class="text-4xl font-bold">
-              Le diagnostic national : où se concentre le patrimoine ?
-            </h2>
-          </div>
+        <div class="flex items-center mb-8">
+          <div class="badge badge-secondary badge-lg mr-4">02</div>
+          <h2 class="text-4xl font-bold">
+            Le diagnostic national : où se concentre le patrimoine ?
+          </h2>
+        </div>
+        <div class="flex justify-end mb-8 flex-wrap gap-4">
           <div class="flex gap-2">
-            <a href="/visualisations/diagnostic-iframe" class="btn btn-outline btn-lg">
+          <div class="flex gap-2">
+            <a
+              href="/visualisations/diagnostic-iframe"
+              class="btn btn-outline btn-lg"
+            >
               <svg
                 class="w-5 h-5 mr-2"
                 fill="none"
@@ -258,7 +284,10 @@ import RatioDoubs from "../components/RatioDoubs.astro";
               </svg>
               Mode Iframe
             </a>
-            <a href="/visualisations/diagnostic-slider" class="btn btn-outline btn-lg">
+            <a
+              href="/visualisations/diagnostic-slider"
+              class="btn btn-outline btn-lg"
+            >
               <svg
                 class="w-5 h-5 mr-2"
                 fill="none"
@@ -269,8 +298,7 @@ import RatioDoubs from "../components/RatioDoubs.astro";
                   stroke-linecap="round"
                   stroke-linejoin="round"
                   stroke-width="2"
-                  d="M8 9l4-4 4 4m0 6l-4 4-4-4"
-                ></path>
+                  d="M8 9l4-4 4 4m0 6l-4 4-4-4"></path>
               </svg>
               Mode Slider
             </a>
@@ -285,9 +313,7 @@ import RatioDoubs from "../components/RatioDoubs.astro";
             </h3>
           </div>
 
-          
           <div class="grid lg:grid-cols-2 gap-20 items-start">
-           
             <div class="order-1">
               <div
                 class="flex items-center justify-center border-2 border-dashed border-base-300 rounded bg-base-100"
@@ -311,7 +337,6 @@ import RatioDoubs from "../components/RatioDoubs.astro";
               </div>
             </div>
 
-         
             <div class="order-2">
               <div class="prose prose-lg max-w-none">
                 <h4 class="text-xl font-semibold mb-3">Analyse</h4>
@@ -350,7 +375,6 @@ import RatioDoubs from "../components/RatioDoubs.astro";
             <h3 class="text-2xl font-bold">Le poids des régions "oubliées"</h3>
           </div>
           <div class="grid lg:grid-cols-2 gap-20 items-start">
-           
             <div class="order-2">
               <div
                 class="flex items-center justify-center border-2 border-dashed border-base-300 rounded bg-base-100"
@@ -374,7 +398,6 @@ import RatioDoubs from "../components/RatioDoubs.astro";
               </div>
             </div>
 
-        
             <div class="order-1">
               <div class="prose prose-lg max-w-none">
                 <h4 class="text-xl font-semibold mb-3">Analyse</h4>
@@ -415,9 +438,16 @@ import RatioDoubs from "../components/RatioDoubs.astro";
             </div>
           </div>
         </div>
+      </div>
+    </div>
+  </section>
 
+  <!-- Section 3: Zoom sur le Doubs -->
+  <section class="py-20 bg-base-100">
+    <div class="container mx-auto px-4">
+      <div class="mx-auto">
         <div class="flex items-center mb-8">
-          <div class="badge badge-secondary badge-lg mr-4">04</div>
+          <div class="badge badge-secondary badge-lg mr-4">03</div>
           <h2 class="text-4xl font-bold">
             Le zoom sur le Doubs : révélation de l'inégalité d'accès
           </h2>
@@ -431,9 +461,7 @@ import RatioDoubs from "../components/RatioDoubs.astro";
             </h3>
           </div>
 
-       
           <div class="grid lg:grid-cols-2 gap-20 items-start">
-       
             <div class="order-1">
               <div
                 class="flex items-center justify-center border-2 border-dashed border-base-300 rounded bg-base-100"
@@ -497,9 +525,7 @@ import RatioDoubs from "../components/RatioDoubs.astro";
               La hiérarchie de l'inégalité : qui est vraiment sous-doté ?
             </h3>
 
-         
             <div class="grid lg:grid-cols-2 gap-20 items-start">
-          
               <div class="order-1">
                 <div class="prose prose-lg max-w-none">
                   <h4 class="text-xl font-semibold mb-3">Analyse</h4>
@@ -529,7 +555,6 @@ import RatioDoubs from "../components/RatioDoubs.astro";
                 </div>
               </div>
 
-      
               <div class="order-2">
                 <div
                   class="flex items-center justify-center border-2 border-dashed border-base-300 rounded bg-base-100"
@@ -557,8 +582,16 @@ import RatioDoubs from "../components/RatioDoubs.astro";
         </div>
 
         <!-- visualisation 5   -->
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 4: Origine du manque -->
+  <section class="py-20 bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50">
+    <div class="container mx-auto px-4">
+      <div class="mx-auto">
         <div class="flex items-center mb-8">
-          <div class="badge badge-secondary badge-lg mr-4">05</div>
+          <div class="badge badge-secondary badge-lg mr-4">04</div>
           <h2 class="text-4xl font-bold">
             L'origine du manque : la qualité de l'offre
           </h2>
@@ -569,9 +602,7 @@ import RatioDoubs from "../components/RatioDoubs.astro";
             <h3 class="text-2xl font-bold">Classement des intercommunalités</h3>
           </div>
 
-        
           <div class="grid lg:grid-cols-2 gap-20 items-start">
-       
             <div class="order-1">
               <div
                 class="flex items-center justify-center border-2 border-dashed border-base-300 rounded bg-base-100"
@@ -642,9 +673,7 @@ import RatioDoubs from "../components/RatioDoubs.astro";
               Que reste-t-il hors des métropoles ?
             </h3>
 
-       
             <div class="grid lg:grid-cols-2 gap-20 items-start">
-        
               <div class="order-1">
                 <div class="prose prose-lg max-w-none">
                   <h4 class="text-xl font-semibold mb-3">Analyse</h4>
@@ -676,7 +705,6 @@ import RatioDoubs from "../components/RatioDoubs.astro";
                 </div>
               </div>
 
-         
               <div class="order-2">
                 <div
                   class="flex items-center justify-center border-2 border-dashed border-base-300 rounded bg-base-100"
@@ -702,37 +730,52 @@ import RatioDoubs from "../components/RatioDoubs.astro";
             </div>
           </div>
         </div>
+      </div>
+    </div>
+  </section>
 
-        <!-- Section 5: Solutions -->
+  <!-- Section 5: Conclusion -->
+  <section class="py-20 bg-base-100">
+    <div class="container mx-auto px-4">
+      <div class="mx-auto">
+        <div class="flex items-center mb-8">
+          <div class="badge badge-secondary badge-lg mr-4">05</div>
+          <h2 class="text-4xl font-bold">Conclusion</h2>
+        </div>
 
-        <!-- <div class="container mx-auto px-4">
-          <div class="max-w-4xl mx-auto">
-            <div class="flex items-center mb-8">
-              <div class="badge badge-secondary badge-lg mr-4">05</div>
-              <h2 class="text-4xl font-bold">Solutions & recommandations</h2>
-            </div>
+              <div class="prose prose-lg max-w-none mb-12">
+                <p class="text-xl text-base-content/80 mb-6">
+                  Cette étude a démontré que le patrimoine en France est un bien
+                  inégalement distribué, tant en volume qu'en accès. Le
+                  département du Doubs illustre parfaitement cette réalité : il
+                  existe une fracture d'accès dramatique entre le Grand Besançon
+                  Métropole et le reste du territoire.
+                </p>
 
-            <div class="prose prose-lg max-w-none mb-8">
-              <p class="text-xl text-base-content/80 mb-6">
-                Face aux inégalités territoriales constatées, nous proposons un
-                ensemble de recommandations stratégiques pour améliorer l'accès
-                au patrimoine culturel dans les zones blanches identifiées.
-              </p>
-            </div> -->
+                <p class="text-xl text-base-content/80 mb-6">
+                  La dotation en patrimoine n'est pas seulement faible en zone
+                  rurale, elle est structurellement et qualitativement limitée.
+                  La majorité des habitants du Doubs vit dans des
+                  intercommunalités où l'offre culturelle est réduite à quelques
+                  monuments, ne leur offrant pas le même éventail de choix que
+                  les résidents des pôles urbains.
+                </p>
 
-            <div class="container mx-auto px-4 text-center">
-              <div class="max-w-3xl mx-auto">
-                <h2 class="text-3xl font-bold mb-6">Pour aller plus loin</h2>
+                <p class="text-xl text-base-content/80 mb-8 font-semibold">
+                  Garantir l'accès à la culture pour tous passe par un
+                  rééquilibrage de l'offre diversifiée au-delà des grandes
+                  métropoles.
+                </p>
+              </div>
 
-                <div class="flex gap-4 justify-center flex-wrap">
-                  <a
-                    href="https://observablehq.com/d/7056e0df4a835b48"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    class="btn btn-secondary btn-lg"
+              <!-- Chiffres clés -->
+              <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
+                <div class="text-center p-6 bg-base-100 rounded-lg shadow-lg">
+                  <div
+                    class="w-16 h-16 mx-auto mb-4 bg-primary/10 rounded-full flex items-center justify-center"
                   >
                     <svg
-                      class="w-5 h-5 mr-2"
+                      class="w-8 h-8 text-primary"
                       fill="none"
                       stroke="currentColor"
                       viewBox="0 0 24 24"
@@ -741,43 +784,140 @@ import RatioDoubs from "../components/RatioDoubs.astro";
                         stroke-linecap="round"
                         stroke-linejoin="round"
                         stroke-width="2"
-                        d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path>
-                    </svg>
-                    Accéder au Notebook
-                    <svg
-                      class="w-4 h-4 ml-1"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        stroke-width="2"
-                        d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
+                        d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"
                       ></path>
                     </svg>
-                  </a>
+                  </div>
+                  <div class="text-3xl font-bold text-primary mb-2">4,8</div>
+                  <div class="text-sm text-base-content/70">
+                    lieux pour 10 000 hab. à Besançon
+                  </div>
+                  <div class="text-xs text-base-content/50 mt-1">
+                    vs 0,32 médiane départementale
+                  </div>
+                </div>
+
+                <div class="text-center p-6 bg-base-100 rounded-lg shadow-lg">
+                  <div
+                    class="w-16 h-16 mx-auto mb-4 bg-secondary/10 rounded-full flex items-center justify-center"
+                  >
+                    <svg
+                      class="w-8 h-8 text-secondary"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
+                      ></path>
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                    </svg>
+                  </div>
+                  <div class="text-3xl font-bold text-secondary mb-2">75%</div>
+                  <div class="text-sm text-base-content/70">
+                    des intercommunalités
+                  </div>
+                  <div class="text-xs text-base-content/50 mt-1">
+                    sous la médiane d'accès
+                  </div>
+                </div>
+
+                <div class="text-center p-6 bg-base-100 rounded-lg shadow-lg">
+                  <div
+                    class="w-16 h-16 mx-auto mb-4 bg-accent/10 rounded-full flex items-center justify-center"
+                  >
+                    <svg
+                      class="w-8 h-8 text-accent"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
+                      ></path>
+                    </svg>
+                  </div>
+                  <div class="text-3xl font-bold text-accent mb-2">262</div>
+                  <div class="text-sm text-base-content/70">
+                    lieux patrimoniaux
+                  </div>
+                  <div class="text-xs text-base-content/50 mt-1">
+                    concentrés à Besançon seul
+                  </div>
+                </div>
+              </div>
+
+              <!-- Call to action -->
+              <div class="container mx-auto px-4 text-center">
+                <div class="max-w-3xl mx-auto">
+                  <h3 class="text-2xl font-bold mb-6">Pour aller plus loin</h3>
+                  <p class="text-base-content/70 mb-6">
+                    Explorez l'analyse complète des données et la méthodologie
+                    utilisée dans notre notebook interactif.
+                  </p>
+
+                  <div class="flex gap-4 justify-center flex-wrap">
+                    <a
+                      href="https://observablehq.com/d/7056e0df4a835b48"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      class="btn btn-secondary btn-lg"
+                    >
+                      <svg
+                        class="w-5 h-5 mr-2"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          stroke-width="2"
+                          d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path>
+                      </svg>
+                      Accéder au Notebook
+                      <svg
+                        class="w-4 h-4 ml-1"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          stroke-width="2"
+                          d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
+                        ></path>
+                      </svg>
+                    </a>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
+        </section>
 
-          <style>
-            html {
-              scroll-behavior: smooth;
-            }
+        <style>
+          html {
+            scroll-behavior: smooth;
+          }
 
-            .navbar a {
-              transition: all 0.2s ease;
-            }
+          .navbar a {
+            transition: all 0.2s ease;
+          }
 
-            .navbar a:hover {
-              transform: translateY(-1px);
-            }
-          </style>
-        </div>
-      </div>
-    </div>
-  </section>
+          .navbar a:hover {
+            transform: translateY(-1px);
+          }
+        </style>
 </Layout>
