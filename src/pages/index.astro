@@ -101,7 +101,7 @@ import Layout from "../layouts/Layout.astro";
             semblent délaissés, créant de véritables "déserts culturels".
           </p>
 
-         <div class="alert alert-info mt-8">
+         <div class="alert bg-primary text-primary-content mt-8">
           <svg
             class="stroke-current shrink-0 w-6 h-6"
             fill="none"
@@ -233,7 +233,7 @@ import Layout from "../layouts/Layout.astro";
           </div>
         </div>
 
-        <div class="alert alert-info mt-8">
+        <div class="alert bg-primary text-primary-content mt-8">
           <svg
             class="currentColor shrink-0 w-6 h-6"
             fill="none"
@@ -297,48 +297,83 @@ import Layout from "../layouts/Layout.astro";
         </div>
 
         <!-- Visualisation 1 : Carte Interactive -->
-        <div class="card bg-base-100 shadow-xl mb-12">
-          <div class="card-body">
-            <div class="flex items-center justify-between mb-4">
-              <h3 class="card-title text-2xl">
-                Carte interactive : Densité patrimoniale par EPCI dans le Doubs
-              </h3>
+        <div class="mb-16">
+          <div class="mb-6">
+            <h3 class="text-2xl font-bold">
+              Carte interactive : Densité patrimoniale par EPCI dans le Doubs
+            </h3>
+          </div>
+
+          <!-- Grille 2 colonnes : Graphique à gauche, Analyse à droite -->
+          <div class="grid lg:grid-cols-2 gap-8 items-start">
+            
+            <!-- Colonne gauche : Zone pour votre graphique -->
+            <div class="order-1">
+              <div class="h-[500px] flex items-center justify-center border-2 border-dashed border-base-300 rounded bg-base-100">
+                <span class="text-base-content/60 text-center px-4">
+                  [Insérez votre graphique ici]<br/>
+                  Carte Leaflet interactive - Ratio patrimoine/10k habitants par EPCI
+                </span>
+              </div>
             </div>
-            <p class="text-base-content/80 mb-4">
-              Cette carte met en lumière la répartition inégale des lieux
-              patrimoniaux au sein du département du Doubs. Les zones en BRYAN
-              foncé indiquent les intercommunalités les mieux dotées, tandis que
-              les zones claires soulignent les territoires à faible densité
-              culturelle, souvent situés dans les zones rurales.
-            </p>
-            <div
-              class="h-[600px] bg-base-200 rounded-lg flex items-center justify-center"
-            >
-              <span class="text-base-content/60">
-                [Carte Leaflet interactive - Ratio patrimoine/10k habitants par
-                EPCI]
-              </span>
+
+            <!-- Colonne droite : Analyse et texte descriptif -->
+            <div class="order-2">
+              <div class="prose prose-lg max-w-none">
+                <h4 class="text-xl font-semibold mb-3">Analyse</h4>
+                
+                <p class="text-base-content/80 mb-4">
+                  Cette carte met en lumière la répartition inégale des lieux
+                  patrimoniaux au sein du département du Doubs. Les zones en couleur
+                  foncée indiquent les intercommunalités les mieux dotées, tandis que
+                  les zones claires soulignent les territoires à faible densité
+                  culturelle, souvent situés dans les zones rurales.
+                </p>
+
+                <div class="alert bg-primary text-primary-content mb-4">
+                  <svg
+                    class="stroke-current shrink-0 w-6 h-6"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                    ></path>
+                  </svg>
+                  <div>
+                    <p class="font-semibold mb-1">Observation clé</p>
+                    <p class="text-sm">
+                      La majorité des EPCI du Doubs présentent moins de 2 équipements
+                      patrimoniaux pour 10 000 habitants, révélant une concentration
+                      du patrimoine dans les espaces urbains comme Besançon, au
+                      détriment des zones périphériques.
+                    </p>
+                  </div>
+                </div>
+
+                <div class="stats stats-vertical shadow w-full">
+                  <div class="stat">
+                    <div class="stat-title">EPCI analysés</div>
+                    <div class="stat-value text-primary text-2xl">15</div>
+                    <div class="stat-desc">Dans le Doubs</div>
+                  </div>
+                  <div class="stat">
+                    <div class="stat-title">Ratio moyen</div>
+                    <div class="stat-value text-secondary text-2xl">1.8</div>
+                    <div class="stat-desc">Équipements / 10k hab.</div>
+                  </div>
+                  <div class="stat">
+                    <div class="stat-title">Zone la mieux dotée</div>
+                    <div class="stat-value text-accent text-2xl">Besançon</div>
+                    <div class="stat-desc">Pôle urbain principal</div>
+                  </div>
+                </div>
+              </div>
             </div>
-            <div class="alert alert-info mt-4">
-              <svg
-                class="stroke-current shrink-0 w-6 h-6"
-                fill="none"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-                ></path>
-              </svg>
-              <span>
-                <strong>Observation clé :</strong> La majorité des EPCI du Doubs
-                présentent moins de 2 équipements patrimoniaux pour 10 000 habitants,
-                révélant une concentration du patrimoine dans les espaces urbains
-                comme Besançon, au détriment des zones périphériques.
-              </span>
-            </div>
+
           </div>
         </div>
 
@@ -349,24 +384,37 @@ import Layout from "../layouts/Layout.astro";
               Comparaison : Ratio de lieux patrimoniaux par EPCI en
               Île-de-France
             </h3>
-       
+          </div>
+
+          <!-- Grille 2 colonnes : Graphique à gauche, Analyse à droite -->
+          <div class="grid lg:grid-cols-2 gap-8 items-start">
+            
+            <!-- Colonne gauche : Zone pour votre graphique -->
+            <div class="order-1">
+              <div class="bg-base-200 rounded-lg p-6 shadow-inner">
+                <div class="h-[500px] flex items-center justify-center border-2 border-dashed border-base-300 rounded">
+                  <span class="text-base-content/60 text-center px-4">
+                    [Insérez votre graphique ici]<br/>
+                    Carte Leaflet interactive
+                  </span>
+                </div>
+              </div>
             </div>
-            <p class="text-base-content/80 mb-4">
+
+            <!-- Colonne droite : Analyse et texte descriptif -->
+            <div class="order-2">
+              <div class="prose prose-lg max-w-none">
+                <h4 class="text-xl font-semibold mb-3">Analyse</h4>
+                
+                <p class="text-base-content/80 mb-4">
               La carte de l’Île-de-France met en évidence une situation inverse
               : une forte densité patrimoniale dans les zones centrales,
               notamment à Paris et Versailles, avec des ratios largement
-              supérieurs à la moyenne nationale.
-            </p>
-            <div
-              class="h-[600px] bg-base-200 rounded-lg flex items-center justify-center"
-            >
-              <span class="text-base-content/60">
-                [Carte Leaflet interactive - Ratio patrimoine/10k habitants par
-                EPCI]
-              </span>
-            </div>
-            <div class="alert alert-info mt-4">
-              <svg
+                  supérieurs à la moyenne nationale.
+                </p>
+
+                <div class="alert bg-primary text-primary-content mb-4">
+                  <svg
                 class="stroke-current shrink-0 w-6 h-6"
                 fill="none"
                 viewBox="0 0 24 24"
@@ -378,13 +426,37 @@ import Layout from "../layouts/Layout.astro";
                   d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
                 ></path>
               </svg>
-              <span>
-                <strong>Observation clé :</strong> Cette comparaison illustre un
-                écart territorial marqué entre un département rural comme le Doubs
-                et une région fortement urbanisée comme l’Île-de-France, soulignant
-                la fracture culturelle entre centre et périphérie.
-              </span>
+                  <div>
+                    <p class="font-semibold mb-1">Observation clé</p>
+                    <p class="text-sm">
+                      Cette comparaison illustre un écart territorial marqué entre
+                      un département rural comme le Doubs et une région fortement
+                      urbanisée comme l'Île-de-France, soulignant la fracture
+                      culturelle entre centre et périphérie.
+                    </p>
+                  </div>
+                </div>
+
+                <div class="stats stats-vertical shadow w-full">
+                  <div class="stat">
+                    <div class="stat-title">EPCI analysés</div>
+                    <div class="stat-value text-primary text-2xl">25</div>
+                    <div class="stat-desc">En Île-de-France</div>
+                  </div>
+                  <div class="stat">
+                    <div class="stat-title">Ratio moyen</div>
+                    <div class="stat-value text-secondary text-2xl">4.2</div>
+                    <div class="stat-desc">Équipements / 10k hab.</div>
+                  </div>
+                  <div class="stat">
+                    <div class="stat-title">Écart type</div>
+                    <div class="stat-value text-accent text-2xl">2.1</div>
+                    <div class="stat-desc">Forte variabilité</div>
+                  </div>
+                </div>
+              </div>
             </div>
+
           </div>
         </div>
 
