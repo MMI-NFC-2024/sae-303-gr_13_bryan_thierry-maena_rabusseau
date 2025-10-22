@@ -1,6 +1,11 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import CartePatrimoine from "../components/CartePatrimoine.astro";
+import Donuts from "../components/Donuts.astro";
+import ScatterPlot from "../components/ScatterPlot.astro";
+import BarChart from "../components/BarChart.astro";
+import Heatmap from "../components/Heatmap.astro";
+import RatioDoubs from "../components/RatioDoubs.astro";
 ---
 
 <Layout>
@@ -96,15 +101,18 @@ import CartePatrimoine from "../components/CartePatrimoine.astro";
             est-elle accessible à tous ? Notre étude analyse la répartition des
             monuments, musées, sites archéologiques et autres lieux culturels
             pour comprendre comment la dotation patrimoniale se répartit sur le
-            territoire. L'enjeu est simple : l'accès à la culture est-il juste,
-            ou est-il réservé aux grandes métropoles ?
+            territoire.
+          </p>
+          <p class="text-xl text-base-content/80 mb-6 font-bold">
+            L'enjeu est simple : l'accès à la culture est-il juste, ou est-il
+            réservé aux grandes métropoles ?
           </p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Section 3: Objectifs -->
+  <!-- Section 2: Objectifs -->
   <section id="objectifs" class="py-20 bg-base-100">
     <div class="container mx-auto px-4">
       <div class="max-w-4xl mx-auto">
@@ -274,54 +282,128 @@ import CartePatrimoine from "../components/CartePatrimoine.astro";
                 <h4 class="text-xl font-semibold mb-3">Analyse</h4>
 
                 <p class="text-base-content/80 mb-4">
-                  L’observation de la carte révèle d’importantes inégalités dans
-                  la répartition du patrimoine. La Nouvelle-Aquitaine et
-                  l’Auvergne-Rhône-Alpes s’imposent largement, avec un
-                  patrimoine diffus et bien réparti entre plusieurs
-                  départements, comme la Gironde ou la Dordogne. Ces vastes
-                  régions bénéficient d’une diversité historique et géographique
-                  qui explique leur domination.
+                  Le graphique met en évidence une forte inégalité territoriale.
+                  Les régions comme les Pays de la Loire, la Normandie ou le
+                  Centre-Val de Loire se distinguent par une faible dotation
+                  patrimoniale, confirmant la fracture observée à l’échelle
+                  nationale.
                 </p>
                 <p class="text-base-content/80 mb-4">
-                  L’Île-de-France, quant à elle, illustre un phénomène de
-                  concentration extrême. Sa richesse patrimoniale dépend presque
-                  exclusivement de Paris, qui réunit à elle seule plus de deux
-                  mille lieux recensés. Sans la capitale, le volume régional
-                  s’effondrerait, prouvant que la centralisation reste marquée.
+                  Le Top 5 des régions les moins bien pourvues représente une
+                  part très faible du patrimoine national. Cette situation
+                  souligne la concentration du patrimoine dans quelques régions
+                  dominantes comme la Nouvelle-Aquitaine ou
+                  l’Auvergne-Rhône-Alpes.
                 </p>
                 <p class="text-base-content/80 mb-4">
-                  Enfin, certaines régions comme les Pays de la Loire ou le
-                  Centre-Val de Loire apparaissent en retrait. Leur position en
-                  bas du classement révèle une fracture nette entre les régions
-                  du Sud, de l’Est et celles du cœur du pays, où le patrimoine
-                  est moins dense et plus dispersé.
+                  Les régions de l’Ouest et du Nord forment un bloc homogène
+                  mais sous-doté, loin derrière les régions du Sud et de l’Est.
+                  Même entre elles, des écarts internes subsistent, révélant une
+                  inégalité structurelle du patrimoine français.
                 </p>
               </div>
             </div>
           </div>
         </div>
+        <!-- visualisation 2   -->
 
-        <!-- Visualisation 1.5 : Carte Interactive -->
         <div class="mb-16">
-          <div class="flex items-center justify-between mb-6">
+          <div class="mb-6">
             <h3 class="text-2xl font-bold">
-              Comparaison : Ratio de lieux patrimoniaux par EPCI en
-              Île-de-France
+              Les régions où le patrimoine est le plus "oublié"
+            </h3>
+
+            <!-- Grille 2 colonnes : Analyse à gauche, Graphique à droite -->
+            <div class="grid lg:grid-cols-2 gap-20 items-start">
+              <!-- Colonne gauche : Analyse et texte descriptif -->
+              <div class="order-1">
+                <div class="prose prose-lg max-w-none">
+                  <h4 class="text-xl font-semibold mb-3">Analyse</h4>
+
+                  <p class="text-base-content/80 mb-4">
+                    L'observation de la carte révèle d'importantes inégalités
+                    dans la répartition du patrimoine. La Nouvelle-Aquitaine et
+                    l'Auvergne-Rhône-Alpes s'imposent largement, avec un
+                    patrimoine diffus et bien réparti entre plusieurs
+                    départements, comme la Gironde ou la Dordogne. Ces vastes
+                    régions bénéficient d'une diversité historique et
+                    géographique qui explique leur domination.
+                  </p>
+                  <p class="text-base-content/80 mb-4">
+                    L'Île-de-France, quant à elle, illustre un phénomène de
+                    concentration extrême. Sa richesse patrimoniale dépend
+                    presque exclusivement de Paris, qui réunit à elle seule plus
+                    de deux mille lieux recensés. Sans la capitale, le volume
+                    régional s'effondrerait, prouvant que la centralisation
+                    reste marquée.
+                  </p>
+                  <p class="text-base-content/80 mb-4">
+                    Enfin, certaines régions comme les Pays de la Loire ou le
+                    Centre-Val de Loire apparaissent en retrait. Leur position
+                    en bas du classement révèle une fracture nette entre les
+                    régions du Sud, de l'Est et celles du cœur du pays, où le
+                    patrimoine est moins dense et plus dispersé.
+                  </p>
+                </div>
+              </div>
+
+              <!-- Colonne droite : Zone pour votre graphique -->
+              <div class="order-2">
+                <div
+                  class="flex items-center justify-center border-2 border-dashed border-base-300 rounded bg-base-100"
+                >
+                  <Donuts />
+                </div>
+                <div
+                  class="flex items-center justify-between mt-3 pt-3 border-t border-base-300"
+                >
+                  <div class="text-sm text-base-content/60">
+                    Source :
+                    <a
+                      href="https://www.data.gouv.fr/datasets/base-des-lieux-et-equipements-culturels-basilic/"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      class="badge badge-outline badge-sm hover:badge-primary transition-colors ml-1"
+                    >
+                      Datagouv - BASILIC
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- visualisation 3   -->
+        <div class="mb-16">
+          <div class="mb-6">
+            <h3 class="text-2xl font-bold">
+         Étude de cas : l'inégalité au cœur du Doubs
             </h3>
           </div>
 
           <!-- Grille 2 colonnes : Graphique à gauche, Analyse à droite -->
-          <div class="grid lg:grid-cols-2 gap-8 items-start">
+          <div class="grid lg:grid-cols-2 gap-20 items-start">
             <!-- Colonne gauche : Zone pour votre graphique -->
             <div class="order-1">
-              <div class="bg-base-200 rounded-lg p-6 shadow-inner">
-                <div
-                  class="h-[500px] flex items-center justify-center border-2 border-dashed border-base-300 rounded"
-                >
-                  <span class="text-base-content/60 text-center px-4">
-                    [Insérez votre graphique ici]<br />
-                    Carte Leaflet interactive
-                  </span>
+              <div
+                class="flex items-center justify-center border-2 border-dashed border-base-300 rounded bg-base-100"
+              >
+                <RatioDoubs />
+              </div>
+              <div
+                class="flex items-center justify-between mt-3 pt-3 border-t border-base-300"
+              >
+                <div class="text-sm text-base-content/60">
+                  Source :
+                  <a
+                    href="https://www.data.gouv.fr/datasets/base-des-lieux-et-equipements-culturels-basilic/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="badge badge-outline badge-sm hover:badge-primary transition-colors ml-1"
+                  >
+                    Datagouv - BASILIC
+                  </a>
                 </div>
               </div>
             </div>
@@ -332,111 +414,87 @@ import CartePatrimoine from "../components/CartePatrimoine.astro";
                 <h4 class="text-xl font-semibold mb-3">Analyse</h4>
 
                 <p class="text-base-content/80 mb-4">
-                  La carte de l’Île-de-France met en évidence une situation
-                  inverse : une forte densité patrimoniale dans les zones
-                  centrales, notamment à Paris et Versailles, avec des ratios
-                  largement supérieurs à la moyenne nationale.
+                  La carte choroplèthe du Doubs révèle de fortes inégalités
+                  d’accès au patrimoine selon les intercommunalités. Les zones
+                  urbaines concentrent l’essentiel de l’offre, tandis que les
+                  territoires ruraux restent nettement en retrait.
                 </p>
-
-                <div class="alert bg-primary text-primary-content mb-4">
-                  <svg
-                    class="stroke-current shrink-0 w-6 h-6"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="2"
-                      d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-                    ></path>
-                  </svg>
-                  <div>
-                    <p class="font-semibold mb-1">Observation clé</p>
-                    <p class="text-sm">
-                      Cette comparaison illustre un écart territorial marqué
-                      entre un département rural comme le Doubs et une région
-                      fortement urbanisée comme l'Île-de-France, soulignant la
-                      fracture culturelle entre centre et périphérie.
-                    </p>
-                  </div>
-                </div>
-
-                <div class="stats stats-vertical shadow w-full">
-                  <div class="stat">
-                    <div class="stat-title">EPCI analysés</div>
-                    <div class="stat-value text-primary text-2xl">25</div>
-                    <div class="stat-desc">En Île-de-France</div>
-                  </div>
-                  <div class="stat">
-                    <div class="stat-title">Ratio moyen</div>
-                    <div class="stat-value text-secondary text-2xl">4.2</div>
-                    <div class="stat-desc">Équipements / 10k hab.</div>
-                  </div>
-                  <div class="stat">
-                    <div class="stat-title">Écart type</div>
-                    <div class="stat-value text-accent text-2xl">2.1</div>
-                    <div class="stat-desc">Forte variabilité</div>
-                  </div>
-                </div>
+                <p class="text-base-content/80 mb-4">
+                  Le Grand Besançon Métropole domine largement avec 4,79 lieux
+                  pour 10 000 habitants, loin devant le Pays de Montbéliard
+                  Agglomération (1,32) et Loue-Lison (1,10). Ces trois pôles
+                  sont les seuls à offrir un accès réellement significatif au
+                  patrimoine.
+                </p>
+                <p class="text-base-content/80 mb-4">
+                  La majorité des intercommunalités rurales affichent moins de
+                  0,5 lieu pour 10 000 habitants, illustrant une sous-dotation
+                  chronique. Les points patrimoniaux se concentrent autour de
+                  Besançon, laissant le Haut-Doubs et les zones périphériques
+                  presque dépourvues d’offre culturelle.
+                </p>
               </div>
             </div>
           </div>
         </div>
-      </div>
-    </div>
-  </section>
 
-  <!-- Section 5: Solutions -->
-  <section id="solutions" class="py-20 bg-base-100">
-    <div class="container mx-auto px-4">
-      <div class="max-w-4xl mx-auto">
-        <div class="flex items-center mb-8">
-          <div class="badge badge-secondary badge-lg mr-4">05</div>
-          <h2 class="text-4xl font-bold">Solutions & Recommandations</h2>
-        </div>
+        <!-- visualisation 4   -->
 
-        <div class="prose prose-lg max-w-none mb-8">
-          <p class="text-xl text-base-content/80 mb-6">
-            Face aux inégalités territoriales constatées, nous proposons un
-            ensemble de recommandations stratégiques pour améliorer l'accès au
-            patrimoine culturel dans les zones blanches identifiées.
-          </p>
-        </div>
+        <div class="mb-16">
+          <div class="mb-6">
+            <h3 class="text-2xl font-bold">
+     Les intercommunalités les plus défavorisées
+            </h3>
 
-        <!-- Axes stratégiques -->
-        <div class="space-y-6 mb-12">
-          <!-- Solution 1 -->
-          <div class="card bg-base-200 shadow-xl">
-            <div class="card-body">
-              <div class="flex items-start">
-                <div class="flex-1">
-                  <h3 class="card-title text-xl mb-3">
-                    Développement d'équipements de proximité
-                  </h3>
+            <!-- Grille 2 colonnes : Analyse à gauche, Graphique à droite -->
+            <div class="grid lg:grid-cols-2 gap-20 items-start">
+              <!-- Colonne gauche : Analyse et texte descriptif -->
+              <div class="order-1">
+                <div class="prose prose-lg max-w-none">
+                  <h4 class="text-xl font-semibold mb-3">Analyse</h4>
+
                   <p class="text-base-content/80 mb-4">
-                    Créer des "micro-musées" et points d'accès au patrimoine
-                    dans les zones blanches, en s'appuyant sur les ressources
-                    locales existantes.
+                    Le graphique révèle une nette domination de Grand Besançon
+                    Métropole, seule intercommunalité à combiner un grand nombre
+                    de lieux et un accès élevé pour les habitants (4,79 lieux
+                    pour 10 000 hab.). Elle concentre ainsi l’essentiel du
+                    patrimoine du département.
                   </p>
-                  <div class="flex flex-wrap gap-2">
-                    <div class="badge badge-outline">Coût modéré</div>
-                    <div class="badge badge-outline">Impact local fort</div>
-                    <div class="badge badge-outline">Déploiement rapide</div>
-                  </div>
-                  <div class="mt-4">
-                    <h4 class="font-semibold mb-2">Actions concrètes :</h4>
-                    <ul class="list-disc pl-6 space-y-1 text-sm">
-                      <li>
-                        Transformation de bâtiments patrimoniaux en lieux
-                        culturels
-                      </li>
-                      <li>Création de circuits patrimoniaux locaux</li>
-                      <li>
-                        Valorisation des petits patrimoines (lavoirs, fontaines,
-                        etc.)
-                      </li>
-                    </ul>
+                  <p class="text-base-content/80 mb-4">
+                    Le Pays de Montbéliard Agglomération (1,32) et Loue-Lison
+                    (1,10) se distinguent légèrement, mais restent loin derrière
+                    Besançon. Ils représentent les seuls pôles secondaires
+                    disposant d’un accès convenable au patrimoine.
+                  </p>
+                  <p class="text-base-content/80 mb-4">
+                    La plupart des intercommunalités affichent moins de 40 lieux
+                    et un ratio inférieur à 0,5 pour 10 000 hab. La médiane de
+                    0,32 illustre ce manque généralisé : plus de la moitié du
+                    territoire du Doubs reste faiblement doté en patrimoine.
+                  </p>
+                </div>
+              </div>
+
+              <!-- Colonne droite : Zone pour votre graphique -->
+              <div class="order-2">
+                <div
+                  class="flex items-center justify-center border-2 border-dashed border-base-300 rounded bg-base-100"
+                >
+                  <ScatterPlot />
+                </div>
+                <div
+                  class="flex items-center justify-between mt-3 pt-3 border-t border-base-300"
+                >
+                  <div class="text-sm text-base-content/60">
+                    Source :
+                    <a
+                      href="https://www.data.gouv.fr/datasets/base-des-lieux-et-equipements-culturels-basilic/"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      class="badge badge-outline badge-sm hover:badge-primary transition-colors ml-1"
+                    >
+                      Datagouv - BASILIC
+                    </a>
                   </div>
                 </div>
               </div>
@@ -444,64 +502,220 @@ import CartePatrimoine from "../components/CartePatrimoine.astro";
           </div>
         </div>
 
-        <section class="py-16 bg-gradient-to-br from-base-300 to-base-200">
-          <div class="container mx-auto px-4 text-center">
-            <div class="max-w-3xl mx-auto">
-              <h2 class="text-3xl font-bold mb-6">Pour aller plus loin</h2>
+        <!-- visualisation 5   -->
 
-              <div class="flex gap-4 justify-center flex-wrap">
-                <a
-                  href="https://observablehq.com/d/7056e0df4a835b48"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  class="btn btn-secondary btn-lg"
-                >
-                  <svg
-                    class="w-5 h-5 mr-2"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
+        <div class="mb-16">
+          <div class="mb-6">
+            <h3 class="text-2xl font-bold">
+           Classement des intercommunalités
+            </h3>
+          </div>
+
+          <!-- Grille 2 colonnes : Graphique à gauche, Analyse à droite -->
+          <div class="grid lg:grid-cols-2 gap-20 items-start">
+            <!-- Colonne gauche : Zone pour votre graphique -->
+            <div class="order-1">
+              <div
+                class="flex items-center justify-center border-2 border-dashed border-base-300 rounded bg-base-100"
+              >
+                <BarChart />
+              </div>
+              <div
+                class="flex items-center justify-between mt-3 pt-3 border-t border-base-300"
+              >
+                <div class="text-sm text-base-content/60">
+                  Source :
+                  <a
+                    href="https://www.data.gouv.fr/datasets/base-des-lieux-et-equipements-culturels-basilic/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="badge badge-outline badge-sm hover:badge-primary transition-colors ml-1"
                   >
-                    <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="2"
-                      d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path>
-                  </svg>
-                  Accéder au Notebook
-                  <svg
-                    class="w-4 h-4 ml-1"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="2"
-                      d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
-                    ></path>
-                  </svg>
-                </a>
+                    Datagouv - BASILIC
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            <!-- Colonne droite : Analyse et texte descriptif -->
+            <div class="order-2">
+              <div class="prose prose-lg max-w-none">
+                <h4 class="text-xl font-semibold mb-3">Analyse</h4>
+
+                <p class="text-base-content/80 mb-4">
+                  Le bar chart confirme la domination de Grand Besançon
+                  Métropole, avec 262 lieux et le meilleur accès au patrimoine
+                  (4,8 lieux pour 10 000 hab.). Son poids patrimonial reste
+                  stable quel que soit le critère utilisé.
+                </p>
+                <p class="text-base-content/80 mb-4">
+                  Le Pays de Montbéliard Agglomération (72 lieux, 1,3 / 10K
+                  hab.) et Loue-Lison (60 lieux, 1,1 / 10K hab.) suivent,
+                  constituant les seuls pôles secondaires dépassant un lieu pour
+                  10 000 habitants, mais loin derrière Besançon.
+                </p>
+                <p class="text-base-content/80 mb-4">
+                  Les intercommunalités rurales (Plateau du Russey, Frasne,
+                  Entre Doubs et Loue) affichent 3 à 8 lieux et des ratios
+                  proches de 0,1 / 10K hab., illustrant une répartition à trois
+                  vitesses : un leader, deux pôles secondaires, et une large
+                  majorité sous-dotée, révélant une pénurie d’accès au
+                  patrimoine pour la majorité des habitants.
+                </p>
               </div>
             </div>
           </div>
-        </section>
+        </div>
+
+        <!-- visualisation 6   -->
+
+        <div class="mb-16">
+          <div class="mb-6">
+            <h3 class="text-2xl font-bold">
+             La spécialisation territoriale
+            </h3>
+
+            <!-- Grille 2 colonnes : Analyse à gauche, Graphique à droite -->
+            <div class="grid lg:grid-cols-2 gap-20 items-start">
+              <!-- Colonne gauche : Analyse et texte descriptif -->
+              <div class="order-1">
+                <div class="prose prose-lg max-w-none">
+                  <h4 class="text-xl font-semibold mb-3">Analyse</h4>
+
+                  <p class="text-base-content/80 mb-4">
+                    La carte de chaleur montre que le patrimoine du Doubs repose
+                    presque exclusivement sur les monuments historiques. Grand
+                    Besançon Métropole concentre 246 lieux sur 262, suivi par
+                    Montbéliard (61) et Loue-Lison (59). Les intercommunalités
+                    rurales restent très peu dotées, souvent entre 5 et 12
+                    lieux, exclusivement des monuments.
+                  </p>
+                  <p class="text-base-content/80 mb-4">
+                    Seules les zones urbaines disposent d’une offre diversifiée
+                    : Besançon (4 archives, 7 musées) et Montbéliard (3
+                    archives, 2 musées) concentrent la variété culturelle. Les
+                    autres intercommunalités possèdent à peine un musée et
+                    presque aucune archive.
+                  </p>
+                  <p class="text-base-content/80 mb-4">
+                    Le Doubs présente une dualité forte : un patrimoine abondant
+                    mais uniforme, dominé par les monuments, contre une
+                    diversité patrimoniale concentrée uniquement dans les grands
+                    pôles urbains. Les zones rurales restent faiblement dotées
+                    et peu diversifiées, révélant un manque d’infrastructures
+                    culturelles sur la majorité du territoire
+                  </p>
+                </div>
+              </div>
+
+              <!-- Colonne droite : Zone pour votre graphique -->
+              <div class="order-2">
+                <div
+                  class="flex items-center justify-center border-2 border-dashed border-base-300 rounded bg-base-100"
+                >
+                  <Heatmap />
+                </div>
+                <div
+                  class="flex items-center justify-between mt-3 pt-3 border-t border-base-300"
+                >
+                  <div class="text-sm text-base-content/60">
+                    Source :
+                    <a
+                      href="https://www.data.gouv.fr/datasets/base-des-lieux-et-equipements-culturels-basilic/"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      class="badge badge-outline badge-sm hover:badge-primary transition-colors ml-1"
+                    >
+                      Datagouv - BASILIC
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Section 5: Solutions -->
+   
+          <div class="container mx-auto px-4">
+            <div class="max-w-4xl mx-auto">
+              <div class="flex items-center mb-8">
+                <div class="badge badge-secondary badge-lg mr-4">05</div>
+                <h2 class="text-4xl font-bold">Solutions & Recommandations</h2>
+              </div>
+
+              <div class="prose prose-lg max-w-none mb-8">
+                <p class="text-xl text-base-content/80 mb-6">
+                  Face aux inégalités territoriales constatées, nous proposons
+                  un ensemble de recommandations stratégiques pour améliorer
+                  l'accès au patrimoine culturel dans les zones blanches
+                  identifiées.
+                </p>
+              </div>
+
+            
+                <div class="container mx-auto px-4 text-center">
+                  <div class="max-w-3xl mx-auto">
+                    <h2 class="text-3xl font-bold mb-6">
+                      Pour aller plus loin
+                    </h2>
+
+                    <div class="flex gap-4 justify-center flex-wrap">
+                      <a
+                        href="https://observablehq.com/d/7056e0df4a835b48"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="btn btn-secondary btn-lg"
+                      >
+                        <svg
+                          class="w-5 h-5 mr-2"
+                          fill="none"
+                          stroke="currentColor"
+                          viewBox="0 0 24 24"
+                        >
+                          <path
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            stroke-width="2"
+                            d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path>
+                        </svg>
+                        Accéder au Notebook
+                        <svg
+                          class="w-4 h-4 ml-1"
+                          fill="none"
+                          stroke="currentColor"
+                          viewBox="0 0 24 24"
+                        >
+                          <path
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            stroke-width="2"
+                            d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
+                          ></path>
+                        </svg>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+           
+            </div>
+
+            <style>
+              html {
+                scroll-behavior: smooth;
+              }
+
+              .navbar a {
+                transition: all 0.2s ease;
+              }
+
+              .navbar a:hover {
+                transform: translateY(-1px);
+              }
+            </style>
+          </div>
+       
       </div>
-
-      <style>
-        html {
-          scroll-behavior: smooth;
-        }
-
-        .navbar a {
-          transition: all 0.2s ease;
-        }
-
-        .navbar a:hover {
-          transform: translateY(-1px);
-        }
-      </style>
     </div>
   </section></Layout
 >
