@@ -341,12 +341,48 @@ import Layout from "../layouts/Layout.astro";
           <h2 class="text-4xl font-bold">Analyse & Visualisations</h2>
         </div>
 
-        <div class="prose prose-lg max-w-none mb-12">
+        <div class="prose prose-lg max-w-none mb-8">
           <p class="text-xl text-base-content/80">
             À travers une série de visualisations interactives, nous explorons
             les données pour révéler les inégalités territoriales d'accès au
             patrimoine culturel.
           </p>
+        </div>
+
+        <!-- Boutons d'accès aux visualisations -->
+        <div class="flex gap-4 justify-center mb-12 flex-wrap">
+          <a href="/visualisations/slider" class="btn btn-primary btn-lg">
+            <svg
+              class="w-5 h-5 mr-2"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M7 4v16M17 4v16M3 8h4m10 0h4M3 12h18M3 16h4m10 0h4M4 20h16a1 1 0 001-1V5a1 1 0 00-1-1H4a1 1 0 00-1 1v14a1 1 0 001 1z"
+              ></path>
+            </svg>
+            Voir en mode Slider
+          </a>
+          <a href="/visualisations/iframe" class="btn btn-secondary btn-lg">
+            <svg
+              class="w-5 h-5 mr-2"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
+              ></path>
+            </svg>
+            Voir en mode Iframe
+          </a>
         </div>
 
         <!-- Visualisation 1 : Carte Interactive -->
@@ -532,9 +568,12 @@ import Layout from "../layouts/Layout.astro";
               <div class="card bg-warning/10 border border-warning/20">
                 <div class="card-body">
                   <h4 class="font-bold text-warning">Zone à risque</h4>
-                  <p class="text-sm">Hauts-de-France (7.3%) et Bretagne (7.0%) </p>
+                  <p class="text-sm">
+                    Hauts-de-France (7.3%) et Bretagne (7.0%)
+                  </p>
                   <p class="text-xs text-base-content/60">
-                   Dotation proportionnelle faible (autour de 7%) nécessitant une attention particulière.
+                    Dotation proportionnelle faible (autour de 7%) nécessitant
+                    une attention particulière.
                   </p>
                 </div>
               </div>
@@ -543,7 +582,8 @@ import Layout from "../layouts/Layout.astro";
                   <h4 class="font-bold text-info">Situation moyenne</h4>
                   <p class="text-sm">Grand Est (9.8%) et Occitanie (9.0%)</p>
                   <p class="text-xs text-base-content/60">
-                   Dotation située dans la moyenne nationale haute ou intermédiaire.
+                    Dotation située dans la moyenne nationale haute ou
+                    intermédiaire.
                   </p>
                 </div>
               </div>
@@ -573,9 +613,9 @@ import Layout from "../layouts/Layout.astro";
                   Inégalités majeures
                 </h4>
                 <ul class="list-disc pl-6 space-y-2 text-base-content/80">
-                  <li>A METTRE </li>
-                  <li>A METTRE </li>
-                  <li>A METTRE </li>
+                  <li>A METTRE</li>
+                  <li>A METTRE</li>
+                  <li>A METTRE</li>
                 </ul>
               </div>
               <div>
@@ -593,9 +633,9 @@ import Layout from "../layouts/Layout.astro";
                   Opportunités identifiées
                 </h4>
                 <ul class="list-disc pl-6 space-y-2 text-base-content/80">
-                  <li>A METTRE </li>
-                  <li>A METTRE </li>
-                  <li>A METTRE </li>
+                  <li>A METTRE</li>
+                  <li>A METTRE</li>
+                  <li>A METTRE</li>
                 </ul>
               </div>
             </div>
@@ -794,7 +834,6 @@ import Layout from "../layouts/Layout.astro";
           </div>
         </div>
 
-  
         <!-- Call to action final -->
         <div class="text-center mt-12">
           <div class="alert alert-success">
@@ -885,7 +924,12 @@ import Layout from "../layouts/Layout.astro";
             </svg>
             Nous contacter
           </button>
-          <a href="https://observablehq.com/d/7056e0df4a835b48" target="_blank" rel="noopener noreferrer" class="btn btn-accent">
+          <a
+            href="https://observablehq.com/d/7056e0df4a835b48"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="btn btn-accent"
+          >
             <svg
               class="w-5 h-5 mr-2"
               fill="none"
@@ -896,8 +940,7 @@ import Layout from "../layouts/Layout.astro";
                 stroke-linecap="round"
                 stroke-linejoin="round"
                 stroke-width="2"
-                d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"
-              ></path>
+                d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path>
             </svg>
             Accéder au Notebook
             <svg
@@ -915,7 +958,6 @@ import Layout from "../layouts/Layout.astro";
             </svg>
           </a>
         </div>
-    
       </div>
     </div>
   </section>
