@@ -1,0 +1,184 @@
+---
+
+---
+
+<div class="scatter-plot p-4">
+  <h3 class="text-xl font-semibold mb-4">
+    Analyse des EPCI du Doubs : Ratio vs Nombre de Lieux
+  </h3>
+
+  <div
+    id="scatter-container"
+    class="rounded-lg p-4 min-h-96 flex items-center justify-center"
+  >
+    <span class="loading loading-spinner loading-lg"></span>
+    <span class="ml-2">Chargement du graphique...</span>
+  </div>
+</div>
+
+<script>
+  import * as Plot from "@observablehq/plot";
+  import * as d3 from "d3";
+
+  let basilicData, epciGeoJSON;
+  let dataScatterDoubs, medianRatioDoubs;
+
+  // Population estimée par département (approximation)
+  const popDeptAnnuaire = {
+    "25": 543000, // Population approximative du Doubs
+  };
+
+  async function loadData() {
+    try {
+      // Chargement des données
+      [basilicData, epciGeoJSON] = await Promise.all([
+        d3.json("/src/assets/basilic_final.json"),
+        d3.json("/src/assets/intercomunalites.json"),
+      ]);
+
+      console.log(
+        `✅ Données chargées: ${basilicData.length} lieux, ${epciGeoJSON.features.length} EPCI`
+      );
+
+      prepareScatterData();
+    } catch (error) {
+      console.error("❌ Erreur lors du chargement:", error);
+      showError(`Erreur de chargement: ${error.message}`);
+    }
+  }
+
+  function prepareScatterData() {
+    // Filtrer les lieux du Doubs
+    const lieuxDoubs = basilicData.filter(
+      (item) => item.code_departement === "25"
+    );
+
+    // Compter les lieux par EPCI
+    const lieuParEpciMap = d3.rollup(
+      lieuxDoubs.filter((d) => d.code_insee_epci),
+      (v) => v.length,
+      (d) => d.code_insee_epci
+    );
+
+    console.log(`📊 EPCI avec lieux:`, lieuParEpciMap.size);
+
+    // Créer le dataset pour le scatter plot
+    dataScatterDoubs = Array.from(lieuParEpciMap, ([codeEpci, nombreLieux]) => {
+      // Trouver les infos EPCI dans le GeoJSON
+      const epciFeature = epciGeoJSON.features.find(
+        (f) => String(f.properties.siren_epci) === String(codeEpci)
+      );
+
+      const nomEpci =
+        epciFeature?.properties.nom_epci ||
+        epciFeature?.properties.nom_court ||
+        `EPCI ${codeEpci}`;
+
+      // Calcul du ratio (approximation basée sur la superficie)
+      const superficie = epciFeature?.properties.st_area_sh || 10000000;
+      const populationEstimee = Math.max(1000, Math.round(superficie / 5000));
+      const ratio =
+        populationEstimee > 0 ? (nombreLieux / populationEstimee) * 10000 : 0;
+
+      return {
+        code_epci: codeEpci,
+        nom_epci: nomEpci,
+        code_departement: "25",
+        nombre_lieux: nombreLieux,
+        ratio_10k_habitants: ratio,
+        nom_departement: "Doubs",
+      };
+    }).filter((d) => d.ratio_10k_habitants > 0);
+
+    console.log(`📈 Points scatter: ${dataScatterDoubs.length}`);
+
+    // Calculer la médiane
+    medianRatioDoubs = d3.median(
+      dataScatterDoubs,
+      (d) => d.ratio_10k_habitants
+    );
+
+    console.log(`📊 Médiane ratio Doubs: ${medianRatioDoubs?.toFixed(2)}`);
+
+    createScatterPlot();
+  }
+
+  function createScatterPlot() {
+    try {
+      if (!dataScatterDoubs || dataScatterDoubs.length === 0) {
+        showError("Aucune donnée disponible pour le scatter plot");
+        return;
+      }
+
+      const maxLieux = d3.max(dataScatterDoubs, (d) => d.nombre_lieux);
+
+      const plot = Plot.plot({
+        title:
+          "Croisement : ratio / 10K hab. vs. nombre brut de lieux par intercommunalité.",
+        subtitle: `La ligne rouge est la médiane départementale.`,
+        width: 900,
+        height: 600,
+        grid: true,
+
+        x: {
+          label: "Ratio de Lieux pour 10 000 Habitants (Densité de l'offre)",
+          zero: true,
+        },
+        y: {
+          label: "Nombre total de lieux patrimoniaux (taille brute)",
+          domain: [0, maxLieux * 1.1],
+        },
+
+        marks: [
+          // Points scatter
+          Plot.dot(dataScatterDoubs, {
+            x: "ratio_10k_habitants",
+            y: "nombre_lieux",
+            fill: "#08519c",
+            r: 6,
+            opacity: 0.85,
+            tip: true,
+            title: (d) =>
+              `${d.nom_epci}\n` +
+              `Lieux : ${d.nombre_lieux}\n` +
+              `Ratio : ${d.ratio_10k_habitants.toFixed(2)} / 10K hab.`,
+          }),
+
+          // Ligne médiane
+          Plot.ruleX([medianRatioDoubs], {
+            stroke: "red",
+            strokeWidth: 2,
+            strokeDasharray: "4,2",
+            title: `Médiane du Ratio Doubs: ${medianRatioDoubs.toFixed(2)}`,
+          }),
+        ],
+      });
+
+      const container = document.getElementById("scatter-container");
+      container.innerHTML = "";
+      container.appendChild(plot);
+
+      console.log(
+        `✅ Scatter plot créé avec ${dataScatterDoubs.length} points`
+      );
+    } catch (error) {
+      console.error("❌ Erreur scatter plot:", error);
+      showError(`Erreur d'affichage: ${error.message}`);
+    }
+  }
+
+  function showError(message) {
+    const container = document.getElementById("scatter-container");
+    container.innerHTML = `<div class="alert alert-error"><span>${message}</span></div>`;
+  }
+
+  async function init() {
+    await loadData();
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", init);
+  } else {
+    init();
+  }
+</script>

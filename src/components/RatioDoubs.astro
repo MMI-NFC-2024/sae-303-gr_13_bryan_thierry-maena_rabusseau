@@ -1,0 +1,313 @@
+---
+
+---
+
+<div class="ratio-doubs p-4">
+  <h3 class="text-xl font-semibold mb-4">
+    Ratio de lieux patrimoniaux par EPCI dans le Doubs
+  </h3>
+
+  <!-- Filtre -->
+  <div class="form-control w-full max-w-xs mb-4">
+    <label class="label">
+      <span class="label-text">Filtrer les lieux par type de patrimoine</span>
+    </label>
+    <select
+      id="categorie-select"
+      class="select select-bordered w-full max-w-xs"
+    >
+      <option value="Tous les lieux">Tous les lieux</option>
+    </select>
+  </div>
+
+  <div
+    id="carte-ratio-container"
+    class="bg-base-200 rounded-lg p-4 min-h-96 flex items-center justify-center"
+  >
+    <span class="loading loading-spinner loading-lg"></span>
+    <span class="ml-2">Chargement de la carte...</span>
+  </div>
+</div>
+
+<script>
+  import * as Plot from "@observablehq/plot";
+  import * as d3 from "d3";
+
+  let basilicData, epciGeoJSON, lieuxDoubsData;
+  let lieuxDoubsPourCarte, categoriesUniques;
+
+  // Fonction pour catégoriser les types (comme dans Observable)
+  function categoriserType(type_lieu) {
+    if (!type_lieu) return "Autre";
+
+    const type = type_lieu.toLowerCase();
+
+    if (type.includes("musée")) return "Musées";
+    if (type.includes("monument")) return "Monuments";
+    if (type.includes("archéologique") || type.includes("site archéo"))
+      return "Sites archéologiques";
+    if (type.includes("archives")) return "Archives";
+    if (type.includes("espace protégé")) return "Espaces protégés";
+
+    return "Autre";
+  }
+
+  async function loadData() {
+    try {
+      // Chargement des données essentielles
+      [basilicData, epciGeoJSON] = await Promise.all([
+        d3.json("/src/assets/basilic_final.json"),
+        d3.json("/src/assets/intercomunalites.json"),
+      ]);
+
+      // Vérification des données
+      if (!basilicData || !Array.isArray(basilicData)) {
+        throw new Error("Données Basilic non disponibles");
+      }
+
+      if (!epciGeoJSON || !epciGeoJSON.features) {
+        throw new Error("Données EPCI non disponibles");
+      }
+
+      console.log(
+        `✅ Données chargées: ${basilicData.length} lieux, ${epciGeoJSON.features.length} EPCI`
+      );
+
+      // Filtrer les lieux du Doubs (code département 25)
+      lieuxDoubsData = basilicData.filter(
+        (item) => item.code_departement === "25"
+      );
+
+      console.log(`📍 Lieux dans le Doubs: ${lieuxDoubsData.length}`);
+
+      prepareCarteData();
+    } catch (error) {
+      console.error("❌ Erreur lors du chargement:", error);
+      showError(`Erreur de chargement: ${error.message}`);
+    }
+  }
+
+  function prepareCarteData() {
+    // Préparer les points pour la carte avec catégorisation
+    lieuxDoubsPourCarte = lieuxDoubsData
+      .filter(
+        (lieu) =>
+          lieu.latitude &&
+          lieu.longitude &&
+          !isNaN(parseFloat(lieu.latitude)) &&
+          !isNaN(parseFloat(lieu.longitude))
+      )
+      .map((lieu) => ({
+        nom_lieu: lieu.nom_lieu || "Lieu sans nom",
+        latitude: parseFloat(lieu.latitude),
+        longitude: parseFloat(lieu.longitude),
+        type_lieu: lieu.type_lieu || "Non classé",
+        categorie_patrimoine: categoriserType(lieu.type_lieu),
+        commune: lieu.commune || "Commune inconnue",
+        code_insee_epci: lieu.code_insee_epci,
+      }));
+
+    // Extraire les catégories uniques basées sur categorie_patrimoine
+    const categoriesBrutes = lieuxDoubsPourCarte.map(
+      (d) => d.categorie_patrimoine
+    );
+    const categoriesNettoyees = [...new Set(categoriesBrutes)]
+      .filter((cat) => cat && cat !== "Autre" && cat.trim() !== "")
+      .sort();
+
+    categoriesUniques = ["Tous les lieux", ...categoriesNettoyees];
+
+    // Si pas de catégories trouvées, ajouter "Autre"
+    if (categoriesNettoyees.length === 0) {
+      categoriesUniques.push("Autre");
+    }
+
+    console.log(`🏷️ Catégories trouvées:`, categoriesNettoyees);
+    console.log(
+      `📊 Répartition:`,
+      categoriesNettoyees.map((cat) => ({
+        categorie: cat,
+        nombre: categoriesBrutes.filter((c) => c === cat).length,
+      }))
+    );
+
+    updateCategorieSelect();
+  }
+
+  function updateCategorieSelect() {
+    const select = document.getElementById("categorie-select");
+    if (select && categoriesUniques) {
+      select.innerHTML = "";
+      categoriesUniques.forEach((cat) => {
+        const option = document.createElement("option");
+        option.value = cat;
+        option.textContent = cat;
+        select.appendChild(option);
+      });
+    }
+  }
+
+  function createCarte(selectedCategorie = "Tous les lieux") {
+    try {
+      // Filtrage des points selon la catégorie sélectionnée
+      const lieuxFiltres = lieuxDoubsPourCarte.filter((d) => {
+        if (selectedCategorie === "Tous les lieux") return true;
+        return d.categorie_patrimoine === selectedCategorie;
+      });
+
+      console.log(
+        `🔍 Filtrage: "${selectedCategorie}" -> ${lieuxFiltres.length} lieux`
+      );
+
+      if (lieuxFiltres.length === 0) {
+        showError(`Aucun lieu trouvé pour la catégorie "${selectedCategorie}"`);
+        return;
+      }
+
+      // Calculer les statistiques EPCI basées sur les lieux filtrés
+      const epciLieuxMap = new Map();
+
+      lieuxFiltres.forEach((lieu) => {
+        if (lieu.code_insee_epci) {
+          const count = epciLieuxMap.get(lieu.code_insee_epci) || 0;
+          epciLieuxMap.set(lieu.code_insee_epci, count + 1);
+        }
+      });
+
+      // Enrichir le GeoJSON avec les ratios
+      const epciAvecRatioFiltre = {
+        ...epciGeoJSON,
+        features: epciGeoJSON.features.map((feature) => {
+          const sirenEpci = feature.properties.siren_epci;
+          const nbLieuxFiltres = epciLieuxMap.get(String(sirenEpci)) || 0;
+
+          // Population estimée basée sur la superficie
+          const superficie = feature.properties.st_area_sh || 10000000;
+          const populationEstimee = Math.max(
+            1000,
+            Math.round(superficie / 5000)
+          );
+          const ratio =
+            populationEstimee > 0
+              ? (nbLieuxFiltres / populationEstimee) * 10000
+              : 0;
+
+          return {
+            ...feature,
+            properties: {
+              ...feature.properties,
+              nb_lieux: nbLieuxFiltres,
+              ratio_10k_habitants: ratio,
+              population_estimee: populationEstimee,
+              nom_epci:
+                feature.properties.nom_epci ||
+                feature.properties.nom_court ||
+                "EPCI",
+            },
+          };
+        }),
+      };
+
+      // Calcul du domaine du ratio pour la légende
+      const ratioValues = epciAvecRatioFiltre.features
+        .map((f) => f.properties.ratio_10k_habitants)
+        .filter((r) => r > 0);
+
+      const minRatio = d3.min(ratioValues) || 0;
+      const maxRatio = d3.max(ratioValues) || 1;
+
+      const plot = Plot.plot({
+        title:
+          "Ratio de lieux patrimoniaux / 10K habitants par EPCI dans le Doubs",
+        subtitle: `Catégorie affichée : ${selectedCategorie} (${lieuxFiltres.length} lieux)`,
+        width: 900,
+        height: 600,
+        projection: { type: "mercator", domain: epciGeoJSON },
+
+        color: {
+          type: "sequential",
+          scheme: "YlGnBu",
+          domain: [minRatio, maxRatio],
+          legend: true,
+          label: "Ratio / 10K hab.",
+          tickFormat: ".1f",
+        },
+
+        marks: [
+          // 1. Polygones EPCI (couleur = ratio)
+          Plot.geo(epciAvecRatioFiltre, {
+            fill: (d) => d.properties.ratio_10k_habitants,
+            stroke: "#fff",
+            strokeWidth: 0.5,
+            title: (d) =>
+              `${d.properties.nom_epci}\n` +
+              `Ratio : ${d.properties.ratio_10k_habitants.toFixed(2)} / 10K hab.\n` +
+              `Lieux (${selectedCategorie}) : ${d.properties.nb_lieux}\n` +
+              `Pop. estimée : ${d.properties.population_estimee.toLocaleString()}`,
+            tip: true,
+          }),
+
+          // 2. Points des lieux patrimoniaux
+          Plot.dot(lieuxFiltres, {
+            x: "longitude",
+            y: "latitude",
+            r: 3,
+            opacity: 0.8,
+            fill: "red",
+            stroke: "white",
+            strokeWidth: 0.5,
+            tip: true,
+            title: (d) =>
+              `${d.nom_lieu}\nType: ${d.categorie_patrimoine}\nCommune: ${d.commune}`,
+          }),
+
+          // 3. Frontières EPCI
+          Plot.geo(epciGeoJSON, {
+            stroke: "black",
+            strokeOpacity: 0.3,
+            fill: "none",
+          }),
+        ],
+      });
+
+      const container = document.getElementById("carte-ratio-container");
+      container.innerHTML = "";
+      container.appendChild(plot);
+      container.className = "carte-ratio-content";
+
+      console.log(`✅ Carte créée avec ${lieuxFiltres.length} points`);
+    } catch (error) {
+      console.error("❌ Erreur carte:", error);
+      showError(`Erreur d'affichage: ${error.message}`);
+    }
+  }
+
+  function showError(message) {
+    const container = document.getElementById("carte-ratio-container");
+    container.innerHTML = `<div class="alert alert-error"><span>${message}</span></div>`;
+  }
+
+  async function init() {
+    await loadData();
+
+    if (lieuxDoubsPourCarte && lieuxDoubsPourCarte.length > 0) {
+      createCarte("Tous les lieux");
+
+      // Event listener pour le filtre
+      document
+        .getElementById("categorie-select")
+        .addEventListener("change", (e) => {
+          console.log(`🎯 Changement de filtre: ${e.target.value}`);
+          createCarte(e.target.value);
+        });
+    } else {
+      showError("Aucune donnée disponible pour le Doubs");
+    }
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", init);
+  } else {
+    init();
+  }
+</script>

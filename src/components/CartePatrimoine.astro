@@ -1,0 +1,323 @@
+---
+
+---
+
+<div class="carte-patrimoine p-4">
+  <h3 id="carte-title" class="text-xl font-semibold mb-4">
+    Répartition du patrimoine culturel par département
+  </h3>
+
+  <!-- Filtre -->
+  <div class="form-control w-full max-w-xs mb-4">
+    <label class="label">
+      <span class="label-text">Granularité d'affichage</span>
+    </label>
+    <select
+      id="granularite-select"
+      class="select select-bordered w-full max-w-xs"
+    >
+      <option value="Départements">Départements</option>
+      <option value="Régions">Régions</option>
+    </select>
+  </div>
+
+  <div
+    id="carte-container"
+    class="bg-base-200 rounded-lg p-4 min-h-96 flex items-center justify-center"
+  >
+    <span class="loading loading-spinner loading-lg"></span>
+    <span class="ml-2">Chargement de la carte...</span>
+  </div>
+</div>
+
+<script>
+  import * as Plot from "@observablehq/plot";
+  import * as d3 from "d3";
+
+  let basilicData, departementsGeo, regionsGeo;
+
+  // Correspondance département -> région (sans DOM-TOM)
+  const departementToRegion = {
+    "01": "Auvergne-Rhône-Alpes",
+    "02": "Hauts-de-France",
+    "03": "Auvergne-Rhône-Alpes",
+    "04": "Provence-Alpes-Côte d'Azur",
+    "05": "Provence-Alpes-Côte d'Azur",
+    "06": "Provence-Alpes-Côte d'Azur",
+    "07": "Auvergne-Rhône-Alpes",
+    "08": "Grand Est",
+    "09": "Occitanie",
+    "10": "Grand Est",
+    "11": "Occitanie",
+    "12": "Occitanie",
+    "13": "Provence-Alpes-Côte d'Azur",
+    "14": "Normandie",
+    "15": "Auvergne-Rhône-Alpes",
+    "16": "Nouvelle-Aquitaine",
+    "17": "Nouvelle-Aquitaine",
+    "18": "Centre-Val de Loire",
+    "19": "Nouvelle-Aquitaine",
+    "21": "Bourgogne-Franche-Comté",
+    "22": "Bretagne",
+    "23": "Nouvelle-Aquitaine",
+    "24": "Nouvelle-Aquitaine",
+    "25": "Bourgogne-Franche-Comté",
+    "26": "Auvergne-Rhône-Alpes",
+    "27": "Normandie",
+    "28": "Centre-Val de Loire",
+    "29": "Bretagne",
+    "30": "Occitanie",
+    "31": "Occitanie",
+    "32": "Occitanie",
+    "33": "Nouvelle-Aquitaine",
+    "34": "Occitanie",
+    "35": "Bretagne",
+    "36": "Centre-Val de Loire",
+    "37": "Centre-Val de Loire",
+    "38": "Auvergne-Rhône-Alpes",
+    "39": "Bourgogne-Franche-Comté",
+    "40": "Nouvelle-Aquitaine",
+    "41": "Centre-Val de Loire",
+    "42": "Auvergne-Rhône-Alpes",
+    "43": "Auvergne-Rhône-Alpes",
+    "44": "Pays de la Loire",
+    "45": "Centre-Val de Loire",
+    "46": "Occitanie",
+    "47": "Nouvelle-Aquitaine",
+    "48": "Occitanie",
+    "49": "Pays de la Loire",
+    "50": "Normandie",
+    "51": "Grand Est",
+    "52": "Grand Est",
+    "53": "Pays de la Loire",
+    "54": "Grand Est",
+    "55": "Grand Est",
+    "56": "Bretagne",
+    "57": "Grand Est",
+    "58": "Bourgogne-Franche-Comté",
+    "59": "Hauts-de-France",
+    "60": "Hauts-de-France",
+    "61": "Normandie",
+    "62": "Hauts-de-France",
+    "63": "Auvergne-Rhône-Alpes",
+    "64": "Nouvelle-Aquitaine",
+    "65": "Occitanie",
+    "66": "Occitanie",
+    "67": "Grand Est",
+    "68": "Grand Est",
+    "69": "Auvergne-Rhône-Alpes",
+    "70": "Bourgogne-Franche-Comté",
+    "71": "Bourgogne-Franche-Comté",
+    "72": "Pays de la Loire",
+    "73": "Auvergne-Rhône-Alpes",
+    "74": "Auvergne-Rhône-Alpes",
+    "75": "Île-de-France",
+    "76": "Normandie",
+    "77": "Île-de-France",
+    "78": "Île-de-France",
+    "79": "Nouvelle-Aquitaine",
+    "80": "Hauts-de-France",
+    "81": "Occitanie",
+    "82": "Occitanie",
+    "83": "Provence-Alpes-Côte d'Azur",
+    "84": "Provence-Alpes-Côte d'Azur",
+    "85": "Pays de la Loire",
+    "86": "Nouvelle-Aquitaine",
+    "87": "Nouvelle-Aquitaine",
+    "88": "Grand Est",
+    "89": "Bourgogne-Franche-Comté",
+    "90": "Bourgogne-Franche-Comté",
+    "91": "Île-de-France",
+    "92": "Île-de-France",
+    "93": "Île-de-France",
+    "94": "Île-de-France",
+    "95": "Île-de-France",
+    // Corse - ajout des codes manquants
+    "20": "Corse",
+    "2A": "Corse",
+    "2B": "Corse",
+  };
+
+  // Codes des départements DOM-TOM à exclure
+  const domTomCodes = [
+    "971",
+    "972",
+    "973",
+    "974",
+    "975",
+    "976",
+    "977",
+    "978",
+    "984",
+    "986",
+    "987",
+    "988",
+  ];
+
+  async function loadData() {
+    [basilicData, departementsGeo, regionsGeo] = await Promise.all([
+      d3.json("/src/assets/basilic_clean.json"),
+      d3.json("/src/assets/departements.json"),
+      d3.json("/src/assets/regions.json"),
+    ]);
+
+    // Filtrer les DOM-TOM des GeoJSON
+    departementsGeo.features = departementsGeo.features.filter((feature) => {
+      const code = feature.properties.code || feature.properties.CODE;
+      return !domTomCodes.includes(String(code));
+    });
+
+    regionsGeo.features = regionsGeo.features.filter((feature) => {
+      const nom = feature.properties.nom || feature.properties.NOM;
+      const regionsOM = [
+        "Guadeloupe",
+        "Martinique",
+        "Guyane",
+        "La Réunion",
+        "Mayotte",
+      ];
+      return !regionsOM.includes(nom);
+    });
+  }
+
+  function aggregateData(granularite) {
+    const dataMap = new Map();
+
+    basilicData.forEach((item) => {
+      if (item.code_postal && item.code_postal !== "Code_Postal") {
+        // Nettoyage du code postal
+        const codePostal = String(item.code_postal).trim();
+
+        // Vérifier que c'est un code postal valide (5 chiffres)
+        if (!/^\d{5}$/.test(codePostal)) {
+          return; // Ignorer les codes postaux invalides
+        }
+
+        const deptCode = codePostal.substring(0, 2);
+
+        // Ignore DOM-TOM
+        if (
+          domTomCodes.some((domtom) =>
+            codePostal.startsWith(domtom.substring(0, 2))
+          )
+        ) {
+          return;
+        }
+
+        let key;
+        if (granularite === "Départements") {
+          key = deptCode;
+        } else {
+          key = departementToRegion[deptCode];
+          // Ignorer silencieusement les départements non mappés
+          if (!key) {
+            return;
+          }
+        }
+
+        const count = dataMap.get(key) || 0;
+        dataMap.set(key, count + 1);
+      }
+    });
+
+    return dataMap;
+  }
+
+  function updateTitle(granularite) {
+    const title = document.getElementById("carte-title");
+    title.textContent = `Répartition du patrimoine culturel par ${granularite.toLowerCase()}`;
+  }
+
+  function createCarte(granularite = "Départements") {
+    try {
+      updateTitle(granularite);
+
+      const dataMap = aggregateData(granularite);
+      const geoData =
+        granularite === "Départements" ? departementsGeo : regionsGeo;
+
+      const enrichedGeoJSON = {
+        ...geoData,
+        features: geoData.features.map((feature) => {
+          let key;
+          if (granularite === "Départements") {
+            key = String(feature.properties.code || feature.properties.CODE);
+          } else {
+            key =
+              feature.properties.nom ||
+              feature.properties.NOM ||
+              feature.properties.name ||
+              feature.properties.NAME;
+          }
+
+          return {
+            ...feature,
+            properties: {
+              ...feature.properties,
+              nombre_lieux: dataMap.get(key) || 0,
+            },
+          };
+        }),
+      };
+
+      const maxValue = Math.max(
+        ...enrichedGeoJSON.features.map((f) => f.properties.nombre_lieux)
+      );
+
+      const plot = Plot.plot({
+        width: 800,
+        height: 500,
+        projection: { type: "mercator", domain: enrichedGeoJSON },
+        color: {
+          type: "sequential",
+          scheme: "YlGnBu",
+          legend: true,
+          label: `Nombre de lieux`,
+          domain: [0, maxValue],
+        },
+        marks: [
+          Plot.geo(enrichedGeoJSON, {
+            fill: (d) => d.properties.nombre_lieux,
+            stroke: "#666",
+            strokeWidth: granularite === "Départements" ? 0.5 : 1,
+            title: (d) => {
+              const nom =
+                d.properties.nom ||
+                d.properties.NOM ||
+                d.properties.name ||
+                d.properties.NAME;
+              return `${nom}\nLieux: ${d.properties.nombre_lieux}`;
+            },
+            tip: true,
+          }),
+        ],
+      });
+
+      const container = document.getElementById("carte-container");
+      container.innerHTML = "";
+      container.appendChild(plot);
+      container.className = "carte-patrimoine-content";
+    } catch (error) {
+      console.error("Erreur:", error);
+      document.getElementById("carte-container").innerHTML =
+        `<div class="alert alert-error"><span>Erreur: ${error.message}</span></div>`;
+    }
+  }
+
+  async function init() {
+    await loadData();
+    createCarte("Départements");
+
+    document
+      .getElementById("granularite-select")
+      .addEventListener("change", (e) => {
+        createCarte(e.target.value);
+      });
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", init);
+  } else {
+    init();
+  }
+</script>
