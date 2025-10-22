@@ -14,10 +14,9 @@ import Layout from "../layouts/Layout.astro";
     <div class="navbar-center hidden lg:flex">
       <ul class="menu menu-horizontal px-1">
         <li><a href="#problematique">1. Problématique</a></li>
-        <li><a href="#donnees">2. Données</a></li>
-        <li><a href="#objectifs">3. Objectifs</a></li>
-        <li><a href="#analyse">4. Analyse</a></li>
-        <li><a href="#solutions">5. Solutions</a></li>
+        <li><a href="#objectifs">2. Objectifs</a></li>
+        <li><a href="#analyse">3. Analyse</a></li>
+        <li><a href="#solutions">4. Solutions</a></li>
       </ul>
     </div>
     <div class="navbar-end">
@@ -41,10 +40,9 @@ import Layout from "../layouts/Layout.astro";
           class="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52"
         >
           <li><a href="#problematique">1. Problématique</a></li>
-          <li><a href="#donnees">2. Données</a></li>
-          <li><a href="#objectifs">3. Objectifs</a></li>
-          <li><a href="#analyse">4. Analyse</a></li>
-          <li><a href="#solutions">5. Solutions</a></li>
+          <li><a href="#objectifs">2. Objectifs</a></li>
+          <li><a href="#analyse">3. Analyse</a></li>
+          <li><a href="#solutions">4. Solutions</a></li>
         </ul>
       </div>
     </div>
@@ -117,18 +115,18 @@ import Layout from "../layouts/Layout.astro";
             semblent délaissés, créant de véritables "déserts culturels".
           </p>
 
-          <div class="alert alert-warning mb-6">
-            <svg
-              class="stroke-current shrink-0 w-6 h-6"
-              fill="none"
-              viewBox="0 0 24 24"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L3.732 16.5c-.77.833.192 2.5 1.732 2.5z"
-              ></path>
+         <div class="alert alert-info mt-8">
+          <svg
+            class="stroke-current shrink-0 w-6 h-6"
+            fill="none"
+            viewBox="0 0 24 24"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+            ></path>
             </svg>
             <span
               ><strong>Constat :</strong> Près de 40 % des habitants des territoires
@@ -149,73 +147,13 @@ import Layout from "../layouts/Layout.astro";
     </div>
   </section>
 
-  <!-- Section 2: Données -->
-  <section id="donnees" class="py-20 bg-base-200">
-    <div class="container mx-auto px-4">
-      <div class="max-w-4xl mx-auto">
-        <div class="flex items-center mb-8">
-          <div class="badge badge-primary badge-lg mr-4">02</div>
-          <h2 class="text-4xl font-bold">Données & Méthodologie</h2>
-        </div>
-
-        <div class="grid md:grid-cols-2 gap-8 mb-12">
-          <div class="card bg-base-100 shadow-xl">
-            <div class="card-body">
-              <h3 class="card-title">Sources de données</h3>
-              <ul class="list-disc pl-6 space-y-2">
-                <li>Base de données BASILIC</li>
-                <li>Département et intercommunalités</li>
-                <li>Données INSEE (population)</li>
-              </ul>
-            </div>
-          </div>
-
-          <div class="card bg-base-100 shadow-xl">
-            <div class="card-body">
-              <h3 class="card-title">Types d'analyses</h3>
-              <ul class="list-disc pl-6 space-y-2">
-                <li>
-                  Ratio de lieux culturels (patrimoniaux) pour 10 000 habitants
-                  par EPCI
-                </li>
-                <li>
-                  Visualisation comparative des départements : Max vs Min
-                  Patrimoine
-                </li>
-                <li>
-                  Visualisation interactive : les régions les moins dotées en
-                  patrimoine
-                </li>
-              </ul>
-            </div>
-          </div>
-        </div>
-
-        <!-- Placeholder pour première visualisation -->
-        <div class="card bg-base-100 shadow-xl">
-          <div class="card-body">
-            <h3 class="card-title mb-4">
-              Répartition des équipements culturels par type
-            </h3>
-            <div
-              class="h-96 bg-base-200 rounded-lg flex items-center justify-center"
-            >
-              <span class="text-base-content/60"
-                >[Visualisation 1 - Graphique de répartition]</span
-              >
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
 
   <!-- Section 3: Objectifs -->
   <section id="objectifs" class="py-20 bg-base-100">
     <div class="container mx-auto px-4">
       <div class="max-w-4xl mx-auto">
         <div class="flex items-center mb-8">
-          <div class="badge badge-primary badge-lg mr-4">03</div>
+          <div class="badge badge-primary badge-lg mr-4">02</div>
           <h2 class="text-4xl font-bold">Objectifs de l'étude</h2>
         </div>
 
@@ -232,9 +170,9 @@ import Layout from "../layouts/Layout.astro";
             <div class="card-body">
               <div class="flex items-start">
                 <div
-                  class="badge badge-secondary badge-lg mr-3 mt-1 h-10 w-10 flex items-center justify-center"
+                  class=" badge-lg mr-3 mt-1 h-10 w-10 flex items-center justify-center"
                 >
-                  1
+                  
                 </div>
                 <div>
                   <h3 class="card-title text-lg mb-2">Analyser</h3>
@@ -252,9 +190,9 @@ import Layout from "../layouts/Layout.astro";
             <div class="card-body">
               <div class="flex items-start">
                 <div
-                  class="badge badge-secondary badge-lg mr-3 mt-1 h-10 w-10 flex items-center justify-center"
+                  class=" badge-lg mr-3 mt-1 h-10 w-10 flex items-center justify-center"
                 >
-                  2
+                  
                 </div>
                 <div>
                   <h3 class="card-title text-lg mb-2">Cartographier</h3>
@@ -272,9 +210,9 @@ import Layout from "../layouts/Layout.astro";
             <div class="card-body">
               <div class="flex items-start">
                 <div
-                  class="badge badge-secondary badge-lg mr-3 mt-1 h-10 w-10 flex items-center justify-center"
+                  class="badge-lg mr-3 mt-1 h-10 w-10 flex items-center justify-center"
                 >
-                  3
+                  
                 </div>
                 <div>
                   <h3 class="card-title text-lg mb-2">Comparer</h3>
@@ -292,9 +230,9 @@ import Layout from "../layouts/Layout.astro";
             <div class="card-body">
               <div class="flex items-start">
                 <div
-                  class="badge badge-secondary badge-lg mr-3 mt-1 h-10 w-10 flex items-center justify-center"
+                  class="badge-lg mr-3 mt-1 h-10 w-10 flex items-center justify-center"
                 >
-                  4
+                  
                 </div>
                 <div>
                   <h3 class="card-title text-lg mb-2">Évaluer</h3>
@@ -337,7 +275,7 @@ import Layout from "../layouts/Layout.astro";
     <div class="container mx-auto px-4">
       <div class="max-w-6xl mx-auto">
         <div class="flex items-center mb-8">
-          <div class="badge badge-primary badge-lg mr-4">04</div>
+          <div class="badge badge-secondary badge-lg mr-4">04</div>
           <h2 class="text-4xl font-bold">Analyse & Visualisations</h2>
         </div>
 
@@ -351,23 +289,7 @@ import Layout from "../layouts/Layout.astro";
 
         <!-- Boutons d'accès aux visualisations -->
         <div class="flex gap-4 justify-center mb-12 flex-wrap">
-          <a href="/visualisations/slider" class="btn btn-primary btn-lg">
-            <svg
-              class="w-5 h-5 mr-2"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M7 4v16M17 4v16M3 8h4m10 0h4M3 12h18M3 16h4m10 0h4M4 20h16a1 1 0 001-1V5a1 1 0 00-1-1H4a1 1 0 00-1 1v14a1 1 0 001 1z"
-              ></path>
-            </svg>
-            Voir en mode Slider
-          </a>
-          <a href="/visualisations/iframe" class="btn btn-secondary btn-lg">
+          <a href="/visualisations/iframe" class="btn btn-primary btn-lg">
             <svg
               class="w-5 h-5 mr-2"
               fill="none"
@@ -392,7 +314,6 @@ import Layout from "../layouts/Layout.astro";
               <h3 class="card-title text-2xl">
                 Carte interactive : Densité patrimoniale par EPCI dans le Doubs
               </h3>
-              <div class="badge badge-accent">Visualisation 1</div>
             </div>
             <p class="text-base-content/80 mb-4">
               Cette carte met en lumière la répartition inégale des lieux
@@ -433,14 +354,13 @@ import Layout from "../layouts/Layout.astro";
         </div>
 
         <!-- Visualisation 1.5 : Carte Interactive -->
-        <div class="card bg-base-100 shadow-xl mb-12">
-          <div class="card-body">
-            <div class="flex items-center justify-between mb-4">
-              <h3 class="card-title text-2xl">
-                Comparaison : Ratio de lieux patrimoniaux par EPCI en
-                Île-de-France
-              </h3>
-              <div class="badge badge-accent">Visualisation 2</div>
+        <div class="mb-16">
+          <div class="flex items-center justify-between mb-6">
+            <h3 class="text-2xl font-bold">
+              Comparaison : Ratio de lieux patrimoniaux par EPCI en
+              Île-de-France
+            </h3>
+       
             </div>
             <p class="text-base-content/80 mb-4">
               La carte de l’Île-de-France met en évidence une situation inverse
@@ -479,117 +399,7 @@ import Layout from "../layouts/Layout.astro";
           </div>
         </div>
 
-        <!-- Visualisation 2 : Comparaison Min/Max -->
-        <div class="card bg-base-100 shadow-xl mb-12">
-          <div class="card-body">
-            <div class="flex items-center justify-between mb-4">
-              <h3 class="card-title text-2xl">
-                Visualisation comparative des départements : Max vs Min
-                Patrimoine
-              </h3>
-              <div class="badge badge-accent">Visualisation 3</div>
-            </div>
-            <p class="text-base-content/80 mb-4">
-              Cette visualisation met en évidence les écarts les plus marqués
-              entre les départements français en matière de patrimoine culturel.
-              Elle souligne la forte concentration des lieux patrimoniaux à
-              Paris, comparée à la faible densité observée dans les territoires
-              les plus modestement dotés.
-            </p>
-            <div
-              class="h-96 bg-base-200 rounded-lg flex items-center justify-center"
-            >
-              <span class="text-base-content/60">
-                [Graphique Plot - Comparaison Min vs Max par département]
-              </span>
-            </div>
-            <div
-              class="stats stats-vertical lg:stats-horizontal shadow mt-6 w-full"
-            >
-              <div class="stat">
-                <div class="stat-title">Département le mieux doté</div>
-                <div class="stat-value text-success text-2xl">Paris (75)</div>
-                <div class="stat-desc">2 156 lieux de patrimoines recensés</div>
-              </div>
-
-              <div class="stat">
-                <div class="stat-title">Département le moins doté</div>
-                <div class="stat-value text-error text-2xl">
-                  Territoire de Belfort (90)
-                </div>
-                <div class="stat-desc">72 lieux de patrimoine seulement</div>
-              </div>
-
-              <div class="stat">
-                <div class="stat-title">Écart</div>
-                <div class="stat-value text-warning text-2xl">
-                  Un rapport de 1 à 30
-                </div>
-                <div class="stat-desc">Entre extrêmes</div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Visualisation -->
-        <div class="card bg-base-100 shadow-xl mb-12">
-          <div class="card-body">
-            <div class="flex items-center justify-between mb-4">
-              <h3 class="card-title text-2xl">
-                Les régions les moins dotées en patrimoine
-              </h3>
-              <div class="badge badge-accent">Visualisation 4</div>
-            </div>
-            <p class="text-base-content/80 mb-4">
-              Analyse comparative des régions françaises selon leur densité
-              d'équipements patrimoniaux. Identifie les territoires prioritaires
-              pour les politiques culturelles.
-            </p>
-            <div
-              class="h-96 bg-base-200 rounded-lg flex items-center justify-center"
-            >
-              <span class="text-base-content/60">
-                [Graphique Plot interactif - Classement régions]
-              </span>
-            </div>
-            <div class="grid md:grid-cols-3 gap-4 mt-6">
-              <div class="card bg-error/10 border border-error/20">
-                <div class="card-body">
-                  <h4 class="font-bold text-error">Zone critique</h4>
-                  <p class="text-sm">
-                    Corse (0.8%) et Centre-Val de Loire (5.5%)
-                  </p>
-                  <p class="text-xs text-base-content/60">
-                    Représentent la plus faible part absolue d'équipements
-                    patrimoniaux sur le territoire national.
-                  </p>
-                </div>
-              </div>
-              <div class="card bg-warning/10 border border-warning/20">
-                <div class="card-body">
-                  <h4 class="font-bold text-warning">Zone à risque</h4>
-                  <p class="text-sm">
-                    Hauts-de-France (7.3%) et Bretagne (7.0%)
-                  </p>
-                  <p class="text-xs text-base-content/60">
-                    Dotation proportionnelle faible (autour de 7%) nécessitant
-                    une attention particulière.
-                  </p>
-                </div>
-              </div>
-              <div class="card bg-info/10 border border-info/20">
-                <div class="card-body">
-                  <h4 class="font-bold text-info">Situation moyenne</h4>
-                  <p class="text-sm">Grand Est (9.8%) et Occitanie (9.0%)</p>
-                  <p class="text-xs text-base-content/60">
-                    Dotation située dans la moyenne nationale haute ou
-                    intermédiaire.
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+  
 
         <!-- Synthèse des résultats -->
         <div
@@ -650,7 +460,7 @@ import Layout from "../layouts/Layout.astro";
     <div class="container mx-auto px-4">
       <div class="max-w-4xl mx-auto">
         <div class="flex items-center mb-8">
-          <div class="badge badge-primary badge-lg mr-4">05</div>
+          <div class="badge badge-secondary badge-lg mr-4 ">05</div>
           <h2 class="text-4xl font-bold">Solutions & Recommandations</h2>
         </div>
 
@@ -668,7 +478,6 @@ import Layout from "../layouts/Layout.astro";
           <div class="card bg-base-200 shadow-xl">
             <div class="card-body">
               <div class="flex items-start">
-                <div class="badge badge-success badge-lg mr-4 mt-1">01</div>
                 <div class="flex-1">
                   <h3 class="card-title text-xl mb-3">
                     Développement d'équipements de proximité
@@ -702,233 +511,20 @@ import Layout from "../layouts/Layout.astro";
             </div>
           </div>
 
-          <!-- Solution 2 -->
-          <div class="card bg-base-200 shadow-xl">
-            <div class="card-body">
-              <div class="flex items-start">
-                <div class="badge badge-success badge-lg mr-4 mt-1">02</div>
-                <div class="flex-1">
-                  <h3 class="card-title text-xl mb-3">
-                    Culture mobile et itinérante
-                  </h3>
-                  <p class="text-base-content/80 mb-4">
-                    Déployer des dispositifs culturels mobiles pour desservir
-                    les territoires isolés et créer une offre culturelle
-                    temporaire régulière.
-                  </p>
-                  <div class="flex flex-wrap gap-2">
-                    <div class="badge badge-outline">Innovation</div>
-                    <div class="badge badge-outline">Large couverture</div>
-                    <div class="badge badge-outline">Flexibilité</div>
-                  </div>
-                  <div class="mt-4">
-                    <h4 class="font-semibold mb-2">Actions concrètes :</h4>
-                    <ul class="list-disc pl-6 space-y-1 text-sm">
-                      <li>Expositions itinérantes dans les zones rurales</li>
-                      <li>Ateliers culturels mobiles</li>
-                      <li>
-                        Partenariats avec bibliothèques et centres sociaux
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Solution 3 -->
-          <div class="card bg-base-200 shadow-xl">
-            <div class="card-body">
-              <div class="flex items-start">
-                <div class="badge badge-success badge-lg mr-4 mt-1">03</div>
-                <div class="flex-1">
-                  <h3 class="card-title text-xl mb-3">
-                    Numérisation et accès digital
-                  </h3>
-                  <p class="text-base-content/80 mb-4">
-                    Développer une plateforme numérique nationale donnant accès
-                    au patrimoine culturel, avec des expériences immersives (VR,
-                    3D).
-                  </p>
-                  <div class="flex flex-wrap gap-2">
-                    <div class="badge badge-outline">Accessibilité 24/7</div>
-                    <div class="badge badge-outline">
-                      Sans barrière géographique
-                    </div>
-                    <div class="badge badge-outline">Évolutif</div>
-                  </div>
-                  <div class="mt-4">
-                    <h4 class="font-semibold mb-2">Actions concrètes :</h4>
-                    <ul class="list-disc pl-6 space-y-1 text-sm">
-                      <li>Visites virtuelles des monuments et musées</li>
-                      <li>Application mobile de découverte patrimoniale</li>
-                      <li>Contenus pédagogiques en ligne</li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Solution 4 -->
-          <div class="card bg-base-200 shadow-xl">
-            <div class="card-body">
-              <div class="flex items-start">
-                <div class="badge badge-success badge-lg mr-4 mt-1">04</div>
-                <div class="flex-1">
-                  <h3 class="card-title text-xl mb-3">
-                    Coopération intercommunale
-                  </h3>
-                  <p class="text-base-content/80 mb-4">
-                    Encourager les collaborations entre territoires pour
-                    mutualiser les ressources et créer des réseaux patrimoniaux
-                    cohérents.
-                  </p>
-                  <div class="flex flex-wrap gap-2">
-                    <div class="badge badge-outline">Efficience</div>
-                    <div class="badge badge-outline">Synergies</div>
-                    <div class="badge badge-outline">Pérennité</div>
-                  </div>
-                  <div class="mt-4">
-                    <h4 class="font-semibold mb-2">Actions concrètes :</h4>
-                    <ul class="list-disc pl-6 space-y-1 text-sm">
-                      <li>Création de réseaux de musées intercommunaux</li>
-                      <li>Parcours culturels trans-territoriaux</li>
-                      <li>Mutualisation des médiateurs culturels</li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Solution 5 -->
-          <div class="card bg-base-200 shadow-xl">
-            <div class="card-body">
-              <div class="flex items-start">
-                <div class="badge badge-success badge-lg mr-4 mt-1">05</div>
-                <div class="flex-1">
-                  <h3 class="card-title text-xl mb-3">
-                    Financement et incitations
-                  </h3>
-                  <p class="text-base-content/80 mb-4">
-                    Mettre en place des mécanismes de financement dédiés aux
-                    zones blanches culturelles avec des critères de péréquation.
-                  </p>
-                  <div class="flex flex-wrap gap-2">
-                    <div class="badge badge-outline">Ciblé</div>
-                    <div class="badge badge-outline">Équitable</div>
-                    <div class="badge badge-outline">Mesurable</div>
-                  </div>
-                  <div class="mt-4">
-                    <h4 class="font-semibold mb-2">Actions concrètes :</h4>
-                    <ul class="list-disc pl-6 space-y-1 text-sm">
-                      <li>Fonds d'aménagement culturel territorial</li>
-                      <li>Bonus financiers pour projets en zone blanche</li>
-                      <li>Accompagnement technique des collectivités</li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Call to action final -->
-        <div class="text-center mt-12">
-          <div class="alert alert-success">
-            <svg
-              class="stroke-current shrink-0 w-6 h-6"
-              fill="none"
-              viewBox="0 0 24 24"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-            </svg>
-            <div>
-              <h4 class="font-bold">
-                Objectif : Réduire de 50% les zones blanches culturelles d'ici
-                2030
-              </h4>
-              <p class="text-sm">
-                En combinant innovation, coopération territoriale et engagement
-                politique, nous pouvons construire une France culturellement
-                plus équitable.
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
   </section>
 
   <section class="py-16 bg-gradient-to-br from-base-300 to-base-200">
     <div class="container mx-auto px-4 text-center">
       <div class="max-w-3xl mx-auto">
         <h2 class="text-3xl font-bold mb-6">Pour aller plus loin</h2>
-        <p class="text-lg text-base-content/80 mb-8">
-          Cette étude constitue une première étape dans la compréhension des
-          inégalités territoriales d'accès au patrimoine. Les données et
-          visualisations présentées sont disponibles en open data pour
-          encourager la recherche et l'action publique.
-        </p>
+    
         <div class="flex gap-4 justify-center flex-wrap">
-          <button class="btn btn-primary">
-            <svg
-              class="w-5 h-5 mr-2"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"
-              ></path>
-            </svg>
-            Télécharger les données
-          </button>
-          <button class="btn btn-secondary">
-            <svg
-              class="w-5 h-5 mr-2"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
-              ></path>
-            </svg>
-            Rapport complet (PDF)
-          </button>
-          <button class="btn btn-outline">
-            <svg
-              class="w-5 h-5 mr-2"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
-              ></path>
-            </svg>
-            Nous contacter
-          </button>
+        
           <a
             href="https://observablehq.com/d/7056e0df4a835b48"
             target="_blank"
             rel="noopener noreferrer"
-            class="btn btn-accent"
+            class="btn btn-secondary btn-lg"
           >
             <svg
               class="w-5 h-5 mr-2"
