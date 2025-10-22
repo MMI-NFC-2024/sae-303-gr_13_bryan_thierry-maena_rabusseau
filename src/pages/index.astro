@@ -1,5 +1,6 @@
 ---
 import Layout from "../layouts/Layout.astro";
+import CartePatrimoine from "../components/CartePatrimoine.astro";
 ---
 
 <Layout>
@@ -87,52 +88,21 @@ import Layout from "../layouts/Layout.astro";
       <div class="max-w-4xl mx-auto">
         <div class="flex items-center mb-8">
           <div class="badge badge-secondary badge-lg mr-4">01</div>
-          <h2 class="text-4xl font-bold">Problématique</h2>
+          <h2 class="text-4xl font-bold">Introduction</h2>
         </div>
-        <h2 class="text-4xl font-bold mr-4 mb-6">
-          Patrimoine oublié : comment les trésors historiques français sont-ils
-          inégalement répartis sur le territoire
-        </h2>
         <div class="prose prose-lg max-w-none">
           <p class="text-xl text-base-content/80 mb-6">
-            L'accès à la culture constitue un enjeu majeur d'aménagement du
-            territoire et d'égalité sociale. Alors que certaines régions
-            bénéficient d'une riche offre culturelle, d'autres territoires
-            semblent délaissés, créant de véritables "déserts culturels".
-          </p>
-
-         <div class="alert bg-primary text-primary-content mt-8">
-          <svg
-            class="stroke-current shrink-0 w-6 h-6"
-            fill="none"
-            viewBox="0 0 24 24"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-            ></path>
-            </svg>
-            <span
-              ><strong>Constat :</strong> Près de 40 % des habitants des territoires
-              ruraux ne bénéficient pas d'un musée ou d'un lieu d'exposition de patrimoine
-              dans leur commune.</span
-            >
-          </div>
-
-          <p>
-            Cette étude propose une analyse de l'accès au patrimoine culturel en
-            France, avec un focus sur la Franche-Comté. Elle vise à identifier
-            et cartographier les zones blanches culturelles à travers trois
-            types d’équipements patrimoniaux essentiels : les musées, les
-            monuments historiques et les sites archéologiques.
+            La France est un pays riche de son histoire, mais cette richesse
+            est-elle accessible à tous ? Notre étude analyse la répartition des
+            monuments, musées, sites archéologiques et autres lieux culturels
+            pour comprendre comment la dotation patrimoniale se répartit sur le
+            territoire. L'enjeu est simple : l'accès à la culture est-il juste,
+            ou est-il réservé aux grandes métropoles ?
           </p>
         </div>
       </div>
     </div>
   </section>
-
 
   <!-- Section 3: Objectifs -->
   <section id="objectifs" class="py-20 bg-base-100">
@@ -156,9 +126,8 @@ import Layout from "../layouts/Layout.astro";
             <div class="card-body">
               <div class="flex items-start">
                 <div
-                  class=" badge-lg mr-3 mt-1 h-10 w-10 flex items-center justify-center"
+                  class="badge-lg mr-3 mt-1 h-10 w-10 flex items-center justify-center"
                 >
-                  
                 </div>
                 <div>
                   <h3 class="card-title text-lg mb-2">Analyser</h3>
@@ -176,9 +145,8 @@ import Layout from "../layouts/Layout.astro";
             <div class="card-body">
               <div class="flex items-start">
                 <div
-                  class=" badge-lg mr-3 mt-1 h-10 w-10 flex items-center justify-center"
+                  class="badge-lg mr-3 mt-1 h-10 w-10 flex items-center justify-center"
                 >
-                  
                 </div>
                 <div>
                   <h3 class="card-title text-lg mb-2">Cartographier</h3>
@@ -198,7 +166,6 @@ import Layout from "../layouts/Layout.astro";
                 <div
                   class="badge-lg mr-3 mt-1 h-10 w-10 flex items-center justify-center"
                 >
-                  
                 </div>
                 <div>
                   <h3 class="card-title text-lg mb-2">Comparer</h3>
@@ -218,7 +185,6 @@ import Layout from "../layouts/Layout.astro";
                 <div
                   class="badge-lg mr-3 mt-1 h-10 w-10 flex items-center justify-center"
                 >
-                  
                 </div>
                 <div>
                   <h3 class="card-title text-lg mb-2">Évaluer</h3>
@@ -237,14 +203,12 @@ import Layout from "../layouts/Layout.astro";
           <svg
             class="currentColor shrink-0 w-6 h-6"
             fill="none"
-             stroke="currentColor"
+            stroke="currentColor"
             viewBox="0 0 24 24"
           >
             <path
-            
               stroke-linecap="round"
               stroke-linejoin="round"
-             
               stroke-width="2"
               d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
             ></path>
@@ -262,58 +226,45 @@ import Layout from "../layouts/Layout.astro";
   <!-- Section 4: Analyse -->
   <section id="analyse" class="py-20 bg-base-200">
     <div class="container mx-auto px-4">
-      <div class="max-w-6xl mx-auto">
+      <div class="mx-auto">
         <div class="flex items-center mb-8">
           <div class="badge badge-secondary badge-lg mr-4">03</div>
-          <h2 class="text-4xl font-bold">Analyse & Visualisations</h2>
-        </div>
-
-        <div class="prose prose-lg max-w-none mb-8">
-          <p class="text-xl text-base-content/80">
-            À travers une série de visualisations interactives, nous explorons
-            les données pour révéler les inégalités territoriales d'accès au
-            patrimoine culturel.
-          </p>
-        </div>
-
-        <!-- Boutons d'accès aux visualisations -->
-        <div class="flex gap-4 justify-center mb-12 flex-wrap">
-          <a href="/visualisations/iframe" class="btn btn-primary btn-lg">
-            <svg
-              class="w-5 h-5 mr-2"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
-              ></path>
-            </svg>
-            Voir en mode Iframe
-          </a>
+          <h2 class="text-4xl font-bold">
+            Le Diagnostic National : Où se concentre le patrimoine ?
+          </h2>
         </div>
 
         <!-- Visualisation 1 : Carte Interactive -->
         <div class="mb-16">
           <div class="mb-6">
             <h3 class="text-2xl font-bold">
-              Carte interactive : Densité patrimoniale par EPCI dans le Doubs
+              Densité patrimoniale par EPCI dans le Doubs
             </h3>
           </div>
 
           <!-- Grille 2 colonnes : Graphique à gauche, Analyse à droite -->
-          <div class="grid lg:grid-cols-2 gap-8 items-start">
-            
+          <div class="grid lg:grid-cols-2 gap-20 items-start">
             <!-- Colonne gauche : Zone pour votre graphique -->
             <div class="order-1">
-              <div class="h-[500px] flex items-center justify-center border-2 border-dashed border-base-300 rounded bg-base-100">
-                <span class="text-base-content/60 text-center px-4">
-                  [Insérez votre graphique ici]<br/>
-                  Carte Leaflet interactive - Ratio patrimoine/10k habitants par EPCI
-                </span>
+              <div
+                class="flex items-center justify-center border-2 border-dashed border-base-300 rounded bg-base-100"
+              >
+                <CartePatrimoine />
+              </div>
+              <div
+                class="flex items-center justify-between mt-3 pt-3 border-t border-base-300"
+              >
+                <div class="text-sm text-base-content/60">
+                  Source :
+                  <a
+                    href="https://www.data.gouv.fr/datasets/base-des-lieux-et-equipements-culturels-basilic/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="badge badge-outline badge-sm hover:badge-primary transition-colors ml-1"
+                  >
+                    Datagouv - BASILIC
+                  </a>
+                </div>
               </div>
             </div>
 
@@ -321,13 +272,70 @@ import Layout from "../layouts/Layout.astro";
             <div class="order-2">
               <div class="prose prose-lg max-w-none">
                 <h4 class="text-xl font-semibold mb-3">Analyse</h4>
-                
+
                 <p class="text-base-content/80 mb-4">
-                  Cette carte met en lumière la répartition inégale des lieux
-                  patrimoniaux au sein du département du Doubs. Les zones en couleur
-                  foncée indiquent les intercommunalités les mieux dotées, tandis que
-                  les zones claires soulignent les territoires à faible densité
-                  culturelle, souvent situés dans les zones rurales.
+                  L’observation de la carte révèle d’importantes inégalités dans
+                  la répartition du patrimoine. La Nouvelle-Aquitaine et
+                  l’Auvergne-Rhône-Alpes s’imposent largement, avec un
+                  patrimoine diffus et bien réparti entre plusieurs
+                  départements, comme la Gironde ou la Dordogne. Ces vastes
+                  régions bénéficient d’une diversité historique et géographique
+                  qui explique leur domination.
+                </p>
+                <p class="text-base-content/80 mb-4">
+                  L’Île-de-France, quant à elle, illustre un phénomène de
+                  concentration extrême. Sa richesse patrimoniale dépend presque
+                  exclusivement de Paris, qui réunit à elle seule plus de deux
+                  mille lieux recensés. Sans la capitale, le volume régional
+                  s’effondrerait, prouvant que la centralisation reste marquée.
+                </p>
+                <p class="text-base-content/80 mb-4">
+                  Enfin, certaines régions comme les Pays de la Loire ou le
+                  Centre-Val de Loire apparaissent en retrait. Leur position en
+                  bas du classement révèle une fracture nette entre les régions
+                  du Sud, de l’Est et celles du cœur du pays, où le patrimoine
+                  est moins dense et plus dispersé.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Visualisation 1.5 : Carte Interactive -->
+        <div class="mb-16">
+          <div class="flex items-center justify-between mb-6">
+            <h3 class="text-2xl font-bold">
+              Comparaison : Ratio de lieux patrimoniaux par EPCI en
+              Île-de-France
+            </h3>
+          </div>
+
+          <!-- Grille 2 colonnes : Graphique à gauche, Analyse à droite -->
+          <div class="grid lg:grid-cols-2 gap-8 items-start">
+            <!-- Colonne gauche : Zone pour votre graphique -->
+            <div class="order-1">
+              <div class="bg-base-200 rounded-lg p-6 shadow-inner">
+                <div
+                  class="h-[500px] flex items-center justify-center border-2 border-dashed border-base-300 rounded"
+                >
+                  <span class="text-base-content/60 text-center px-4">
+                    [Insérez votre graphique ici]<br />
+                    Carte Leaflet interactive
+                  </span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Colonne droite : Analyse et texte descriptif -->
+            <div class="order-2">
+              <div class="prose prose-lg max-w-none">
+                <h4 class="text-xl font-semibold mb-3">Analyse</h4>
+
+                <p class="text-base-content/80 mb-4">
+                  La carte de l’Île-de-France met en évidence une situation
+                  inverse : une forte densité patrimoniale dans les zones
+                  centrales, notamment à Paris et Versailles, avec des ratios
+                  largement supérieurs à la moyenne nationale.
                 </p>
 
                 <div class="alert bg-primary text-primary-content mb-4">
@@ -346,93 +354,10 @@ import Layout from "../layouts/Layout.astro";
                   <div>
                     <p class="font-semibold mb-1">Observation clé</p>
                     <p class="text-sm">
-                      La majorité des EPCI du Doubs présentent moins de 2 équipements
-                      patrimoniaux pour 10 000 habitants, révélant une concentration
-                      du patrimoine dans les espaces urbains comme Besançon, au
-                      détriment des zones périphériques.
-                    </p>
-                  </div>
-                </div>
-
-                <div class="stats stats-vertical shadow w-full">
-                  <div class="stat">
-                    <div class="stat-title">EPCI analysés</div>
-                    <div class="stat-value text-primary text-2xl">15</div>
-                    <div class="stat-desc">Dans le Doubs</div>
-                  </div>
-                  <div class="stat">
-                    <div class="stat-title">Ratio moyen</div>
-                    <div class="stat-value text-secondary text-2xl">1.8</div>
-                    <div class="stat-desc">Équipements / 10k hab.</div>
-                  </div>
-                  <div class="stat">
-                    <div class="stat-title">Zone la mieux dotée</div>
-                    <div class="stat-value text-accent text-2xl">Besançon</div>
-                    <div class="stat-desc">Pôle urbain principal</div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-          </div>
-        </div>
-
-        <!-- Visualisation 1.5 : Carte Interactive -->
-        <div class="mb-16">
-          <div class="flex items-center justify-between mb-6">
-            <h3 class="text-2xl font-bold">
-              Comparaison : Ratio de lieux patrimoniaux par EPCI en
-              Île-de-France
-            </h3>
-          </div>
-
-          <!-- Grille 2 colonnes : Graphique à gauche, Analyse à droite -->
-          <div class="grid lg:grid-cols-2 gap-8 items-start">
-            
-            <!-- Colonne gauche : Zone pour votre graphique -->
-            <div class="order-1">
-              <div class="bg-base-200 rounded-lg p-6 shadow-inner">
-                <div class="h-[500px] flex items-center justify-center border-2 border-dashed border-base-300 rounded">
-                  <span class="text-base-content/60 text-center px-4">
-                    [Insérez votre graphique ici]<br/>
-                    Carte Leaflet interactive
-                  </span>
-                </div>
-              </div>
-            </div>
-
-            <!-- Colonne droite : Analyse et texte descriptif -->
-            <div class="order-2">
-              <div class="prose prose-lg max-w-none">
-                <h4 class="text-xl font-semibold mb-3">Analyse</h4>
-                
-                <p class="text-base-content/80 mb-4">
-              La carte de l’Île-de-France met en évidence une situation inverse
-              : une forte densité patrimoniale dans les zones centrales,
-              notamment à Paris et Versailles, avec des ratios largement
-                  supérieurs à la moyenne nationale.
-                </p>
-
-                <div class="alert bg-primary text-primary-content mb-4">
-                  <svg
-                class="stroke-current shrink-0 w-6 h-6"
-                fill="none"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-                ></path>
-              </svg>
-                  <div>
-                    <p class="font-semibold mb-1">Observation clé</p>
-                    <p class="text-sm">
-                      Cette comparaison illustre un écart territorial marqué entre
-                      un département rural comme le Doubs et une région fortement
-                      urbanisée comme l'Île-de-France, soulignant la fracture
-                      culturelle entre centre et périphérie.
+                      Cette comparaison illustre un écart territorial marqué
+                      entre un département rural comme le Doubs et une région
+                      fortement urbanisée comme l'Île-de-France, soulignant la
+                      fracture culturelle entre centre et périphérie.
                     </p>
                   </div>
                 </div>
@@ -456,11 +381,8 @@ import Layout from "../layouts/Layout.astro";
                 </div>
               </div>
             </div>
-
           </div>
         </div>
-
-  
       </div>
     </div>
   </section>
@@ -470,7 +392,7 @@ import Layout from "../layouts/Layout.astro";
     <div class="container mx-auto px-4">
       <div class="max-w-4xl mx-auto">
         <div class="flex items-center mb-8">
-          <div class="badge badge-secondary badge-lg mr-4 ">05</div>
+          <div class="badge badge-secondary badge-lg mr-4">05</div>
           <h2 class="text-4xl font-bold">Solutions & Recommandations</h2>
         </div>
 
@@ -520,65 +442,66 @@ import Layout from "../layouts/Layout.astro";
               </div>
             </div>
           </div>
-
-  </section>
-
-  <section class="py-16 bg-gradient-to-br from-base-300 to-base-200">
-    <div class="container mx-auto px-4 text-center">
-      <div class="max-w-3xl mx-auto">
-        <h2 class="text-3xl font-bold mb-6">Pour aller plus loin</h2>
-    
-        <div class="flex gap-4 justify-center flex-wrap">
-        
-          <a
-            href="https://observablehq.com/d/7056e0df4a835b48"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="btn btn-secondary btn-lg"
-          >
-            <svg
-              class="w-5 h-5 mr-2"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path>
-            </svg>
-            Accéder au Notebook
-            <svg
-              class="w-4 h-4 ml-1"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
-              ></path>
-            </svg>
-          </a>
         </div>
+
+        <section class="py-16 bg-gradient-to-br from-base-300 to-base-200">
+          <div class="container mx-auto px-4 text-center">
+            <div class="max-w-3xl mx-auto">
+              <h2 class="text-3xl font-bold mb-6">Pour aller plus loin</h2>
+
+              <div class="flex gap-4 justify-center flex-wrap">
+                <a
+                  href="https://observablehq.com/d/7056e0df4a835b48"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="btn btn-secondary btn-lg"
+                >
+                  <svg
+                    class="w-5 h-5 mr-2"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path>
+                  </svg>
+                  Accéder au Notebook
+                  <svg
+                    class="w-4 h-4 ml-1"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
+                    ></path>
+                  </svg>
+                </a>
+              </div>
+            </div>
+          </div>
+        </section>
       </div>
+
+      <style>
+        html {
+          scroll-behavior: smooth;
+        }
+
+        .navbar a {
+          transition: all 0.2s ease;
+        }
+
+        .navbar a:hover {
+          transform: translateY(-1px);
+        }
+      </style>
     </div>
-  </section>
-</Layout>
-
-<style>
-  html {
-    scroll-behavior: smooth;
-  }
-
-  .navbar a {
-    transition: all 0.2s ease;
-  }
-
-  .navbar a:hover {
-    transform: translateY(-1px);
-  }
-</style>
+  </section></Layout
+>
