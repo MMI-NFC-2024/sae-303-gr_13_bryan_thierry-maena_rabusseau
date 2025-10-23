@@ -56,8 +56,8 @@
     try {
       // Chargement des données essentielles
       [basilicData, epciGeoJSON] = await Promise.all([
-        d3.json("/src/assets/basilic_final.json"),
-        d3.json("/src/assets/intercomunalites.json"),
+        d3.json("/assets/basilic_final.json"),
+        d3.json("/assets/intercomunalites.json"),
       ]);
 
       // Vérification des données

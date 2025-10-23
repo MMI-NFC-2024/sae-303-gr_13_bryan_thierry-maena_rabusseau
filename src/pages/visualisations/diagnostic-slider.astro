@@ -217,9 +217,9 @@ import Layout from "../../layouts/Layout.astro";
 
   async function loadData() {
     [basilicData, departementsGeo, regionsGeo] = await Promise.all([
-      d3.json("/src/assets/basilic_clean.json"),
-      d3.json("/src/assets/departements.json"),
-      d3.json("/src/assets/regions.json"),
+      d3.json("/assets/basilic_clean.json"),
+      d3.json("/assets/departements.json"),
+      d3.json("/assets/regions.json"),
     ]);
 
     departementsGeo.features = departementsGeo.features.filter((feature) => {
