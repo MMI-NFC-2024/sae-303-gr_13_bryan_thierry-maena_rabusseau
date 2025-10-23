@@ -35,7 +35,12 @@
           <span class="text-sm">Pourcentage</span>
         </label>
         <label class="cursor-pointer flex items-center gap-2">
-          <input type="radio" name="metrique" value="Nombre" class="radio radio-sm" />
+          <input
+            type="radio"
+            name="metrique"
+            value="Nombre"
+            class="radio radio-sm"
+          />
           <span class="text-sm">Nombre</span>
         </label>
       </div>
@@ -183,7 +188,7 @@
 
     basilicData.forEach((item) => {
       totalItems++;
-      
+
       if (item.code_postal && item.code_postal !== "Code_Postal") {
         const codePostal = String(item.code_postal).trim();
 
@@ -208,7 +213,9 @@
           const count = regionMap.get(region) || 0;
           regionMap.set(region, count + 1);
         } else {
-          console.log(`Département non mappé: ${deptCode} (code postal: ${codePostal})`);
+          console.log(
+            `Département non mappé: ${deptCode} (code postal: ${codePostal})`
+          );
         }
       }
     });
@@ -218,24 +225,35 @@
       Region,
       Nombre_de_Lieux,
     }));
-    
+
     // Debug: affichons toutes les régions calculées
     console.log(`=== DEBUG LOADDATA ===`);
     console.log(`Total items traités: ${totalItems}`);
     console.log(`Items valides avec région: ${validItems}`);
-    console.log(`Codes postaux ignorés (sample):`, Array.from(codesPostauxIgnores).slice(0, 10));
+    console.log(
+      `Codes postaux ignorés (sample):`,
+      Array.from(codesPostauxIgnores).slice(0, 10)
+    );
     console.log("\n=== RÉGIONS DÉTECTÉES ===");
-    
+
     // Trions pour voir les plus et moins dotées
-    const regionsSorted = [...dataRegions].sort((a, b) => b.Nombre_de_Lieux - a.Nombre_de_Lieux);
+    const regionsSorted = [...dataRegions].sort(
+      (a, b) => b.Nombre_de_Lieux - a.Nombre_de_Lieux
+    );
     regionsSorted.forEach((region, index) => {
-      console.log(`${index + 1}. ${region.Region}: ${region.Nombre_de_Lieux} lieux`);
+      console.log(
+        `${index + 1}. ${region.Region}: ${region.Nombre_de_Lieux} lieux`
+      );
     });
-    
+
     console.log("\n=== TOP 5 MOINS DOTÉES ===");
-    const regionsAsc = [...dataRegions].sort((a, b) => a.Nombre_de_Lieux - b.Nombre_de_Lieux);
+    const regionsAsc = [...dataRegions].sort(
+      (a, b) => a.Nombre_de_Lieux - b.Nombre_de_Lieux
+    );
     regionsAsc.slice(0, 5).forEach((region, index) => {
-      console.log(`${index + 1}. ${region.Region}: ${region.Nombre_de_Lieux} lieux`);
+      console.log(
+        `${index + 1}. ${region.Region}: ${region.Nombre_de_Lieux} lieux`
+      );
     });
   }
 
@@ -249,9 +267,11 @@
       const data_sorted_asc = [...dataRegions].sort(
         (a, b) => a.Nombre_de_Lieux - b.Nombre_de_Lieux
       );
-      
+
       data_sorted_asc.forEach((region, index) => {
-        console.log(`${index + 1}. ${region.Region}: ${region.Nombre_de_Lieux} lieux`);
+        console.log(
+          `${index + 1}. ${region.Region}: ${region.Nombre_de_Lieux} lieux`
+        );
       });
 
       // Filtrage selon le choix - Les régions avec le MOINS de lieux
@@ -264,11 +284,15 @@
         console.log("Top 3 des régions les moins dotées sélectionnées:");
       } else {
         data_filtrée_active = data_sorted_asc.slice(0, 5);
-        console.log("Top 5 par défaut des régions les moins dotées sélectionnées:");
+        console.log(
+          "Top 5 par défaut des régions les moins dotées sélectionnées:"
+        );
       }
-      
+
       data_filtrée_active.forEach((region, index) => {
-        console.log(`${index + 1}. ${region.Region}: ${region.Nombre_de_Lieux} lieux`);
+        console.log(
+          `${index + 1}. ${region.Region}: ${region.Nombre_de_Lieux} lieux`
+        );
       });
 
       const total_general = d3.sum(dataRegions, (d) => d.Nombre_de_Lieux);
@@ -405,7 +429,7 @@
 
       const container = document.getElementById("donut-container");
       if (!container) return;
-      
+
       container.innerHTML = "";
       container.className = "p-2"; // Suppression du fond et réduction du padding
 
@@ -418,43 +442,45 @@
       // Légende HTML compacte et lisible
       const legendContainer = document.createElement("div");
       legendContainer.className = "w-full max-w-sm mx-auto";
-      
+
       const legendList = document.createElement("div");
       legendList.className = "space-y-1";
 
       data_filtrée_active.forEach((d) => {
         const item = document.createElement("div");
-        item.className = "flex items-center justify-between py-2 border-b border-base-300 last:border-0";
-        
+        item.className =
+          "flex items-center justify-between py-2 border-b border-base-300 last:border-0";
+
         const left = document.createElement("div");
         left.className = "flex items-center gap-3";
-        
+
         const dot = document.createElement("div");
         dot.className = "w-4 h-4 rounded flex-shrink-0";
         dot.style.backgroundColor = color(d.Region);
-        
+
         const name = document.createElement("span");
         name.className = "font-medium text-sm";
-        name.textContent = d.Region.length > 20 ? d.Region.slice(0, 20) + "…" : d.Region;
-        
+        name.textContent =
+          d.Region.length > 20 ? d.Region.slice(0, 20) + "…" : d.Region;
+
         left.appendChild(dot);
         left.appendChild(name);
-        
+
         const right = document.createElement("div");
         right.className = "text-right";
-        
+
         const count = document.createElement("div");
         count.className = "font-semibold text-sm";
         count.textContent = `${d.Nombre_de_Lieux} lieux`;
-        
+
         const percentage = document.createElement("div");
         percentage.className = "text-xs text-base-content/70";
         const pct = ((d.Nombre_de_Lieux / total_general) * 100).toFixed(1);
         percentage.textContent = `${pct}% du national`;
-        
+
         right.appendChild(count);
         right.appendChild(percentage);
-        
+
         item.appendChild(left);
         item.appendChild(right);
         legendList.appendChild(item);

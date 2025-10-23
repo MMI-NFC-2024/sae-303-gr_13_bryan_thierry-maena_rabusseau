@@ -24,38 +24,44 @@ import Layout from "../../layouts/Layout.astro";
               </svg>
               Retour
             </a>
-           
           </div>
           <div class="badge badge-lg">Mode Slider</div>
         </div>
       </div>
     </header>
 
-   
     <div class="relative h-[calc(100vh-80px)]">
-    
       <div class="carousel w-full h-full">
-      
         <div id="slide1" class="carousel-item relative w-full">
-          <div class="flex flex-col items-center justify-center w-full px-8 py-8">
+          <div
+            class="flex flex-col items-center justify-center w-full px-8 py-8"
+          >
             <div class="max-w-6xl w-full">
               <div class="badge badge-primary badge-lg mb-4">Départements</div>
               <h2 class="text-3xl font-bold mb-4">
                 Répartition du patrimoine culturel par département
               </h2>
               <p class="text-lg text-base-content/80 mb-6">
-                Cartographie détaillée montrant la concentration de lieux patrimoniaux
-                dans chaque département français.
+                Cartographie détaillée montrant la concentration de lieux
+                patrimoniaux dans chaque département français.
               </p>
-              <div class="bg-base-200 rounded-lg p-6" style="min-height: 550px;">
-                <div id="carte-departements" class="flex items-center justify-center min-h-96">
+              <div
+                class="bg-base-200 rounded-lg p-6"
+                style="min-height: 550px;"
+              >
+                <div
+                  id="carte-departements"
+                  class="flex items-center justify-center min-h-96"
+                >
                   <span class="loading loading-spinner loading-lg"></span>
                   <span class="ml-2">Chargement de la carte...</span>
                 </div>
               </div>
             </div>
           </div>
-          <div class="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
+          <div
+            class="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2"
+          >
             <a href="#slide2" class="btn btn-circle btn-ghost opacity-50">❮</a>
             <a href="#slide2" class="btn btn-circle btn-primary">❯</a>
           </div>
@@ -63,336 +69,374 @@ import Layout from "../../layouts/Layout.astro";
 
         <!-- Slide 2: Carte Régions -->
         <div id="slide2" class="carousel-item relative w-full">
-          <div class="flex flex-col items-center justify-center w-full px-8 py-8">
+          <div
+            class="flex flex-col items-center justify-center w-full px-8 py-8"
+          >
             <div class="max-w-6xl w-full">
               <div class="badge badge-primary badge-lg mb-4">Régions</div>
               <h2 class="text-3xl font-bold mb-4">
                 Répartition du patrimoine culturel par région
               </h2>
               <p class="text-lg text-base-content/80 mb-6">
-                Cartographie détaillée montrant la concentration de lieux patrimoniaux dans chaque région française.
+                Cartographie détaillée montrant la concentration de lieux
+                patrimoniaux dans chaque région française.
               </p>
-              <div class="bg-base-200 rounded-lg p-6" style="min-height: 550px;">
-                <div id="carte-regions" class="flex items-center justify-center min-h-96">
+              <div
+                class="bg-base-200 rounded-lg p-6"
+                style="min-height: 550px;"
+              >
+                <div
+                  id="carte-regions"
+                  class="flex items-center justify-center min-h-96"
+                >
                   <span class="loading loading-spinner loading-lg"></span>
                   <span class="ml-2">Chargement de la carte...</span>
                 </div>
               </div>
             </div>
           </div>
-          <div class="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
+          <div
+            class="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2"
+          >
             <a href="#slide1" class="btn btn-circle btn-primary">❮</a>
             <a href="#slide1" class="btn btn-circle btn-ghost opacity-50">❯</a>
           </div>
         </div>
       </div>
 
-      <div class="flex justify-center w-full  gap-2   ">
+      <div class="flex justify-center w-full gap-2">
         <a href="#slide1" class="btn btn-xs">Départements</a>
         <a href="#slide2" class="btn btn-xs">Régions</a>
       </div>
+    </div>
 
-     
-</Layout>
-
-<style>
-  .carousel-item {
-    scroll-snap-align: start;
-  }
-
-  html {
-    scroll-behavior: smooth;
-  }
-</style>
-
-<script>
-  import * as Plot from "@observablehq/plot";
-  import * as d3 from "d3";
-
-  let basilicData, departementsGeo, regionsGeo;
-
-  const departementToRegion = {
-    "01": "Auvergne-Rhône-Alpes",
-    "02": "Hauts-de-France",
-    "03": "Auvergne-Rhône-Alpes",
-    "04": "Provence-Alpes-Côte d'Azur",
-    "05": "Provence-Alpes-Côte d'Azur",
-    "06": "Provence-Alpes-Côte d'Azur",
-    "07": "Auvergne-Rhône-Alpes",
-    "08": "Grand Est",
-    "09": "Occitanie",
-    "10": "Grand Est",
-    "11": "Occitanie",
-    "12": "Occitanie",
-    "13": "Provence-Alpes-Côte d'Azur",
-    "14": "Normandie",
-    "15": "Auvergne-Rhône-Alpes",
-    "16": "Nouvelle-Aquitaine",
-    "17": "Nouvelle-Aquitaine",
-    "18": "Centre-Val de Loire",
-    "19": "Nouvelle-Aquitaine",
-    "21": "Bourgogne-Franche-Comté",
-    "22": "Bretagne",
-    "23": "Nouvelle-Aquitaine",
-    "24": "Nouvelle-Aquitaine",
-    "25": "Bourgogne-Franche-Comté",
-    "26": "Auvergne-Rhône-Alpes",
-    "27": "Normandie",
-    "28": "Centre-Val de Loire",
-    "29": "Bretagne",
-    "30": "Occitanie",
-    "31": "Occitanie",
-    "32": "Occitanie",
-    "33": "Nouvelle-Aquitaine",
-    "34": "Occitanie",
-    "35": "Bretagne",
-    "36": "Centre-Val de Loire",
-    "37": "Centre-Val de Loire",
-    "38": "Auvergne-Rhône-Alpes",
-    "39": "Bourgogne-Franche-Comté",
-    "40": "Nouvelle-Aquitaine",
-    "41": "Centre-Val de Loire",
-    "42": "Auvergne-Rhône-Alpes",
-    "43": "Auvergne-Rhône-Alpes",
-    "44": "Pays de la Loire",
-    "45": "Centre-Val de Loire",
-    "46": "Occitanie",
-    "47": "Nouvelle-Aquitaine",
-    "48": "Occitanie",
-    "49": "Pays de la Loire",
-    "50": "Normandie",
-    "51": "Grand Est",
-    "52": "Grand Est",
-    "53": "Pays de la Loire",
-    "54": "Grand Est",
-    "55": "Grand Est",
-    "56": "Bretagne",
-    "57": "Grand Est",
-    "58": "Bourgogne-Franche-Comté",
-    "59": "Hauts-de-France",
-    "60": "Hauts-de-France",
-    "61": "Normandie",
-    "62": "Hauts-de-France",
-    "63": "Auvergne-Rhône-Alpes",
-    "64": "Nouvelle-Aquitaine",
-    "65": "Occitanie",
-    "66": "Occitanie",
-    "67": "Grand Est",
-    "68": "Grand Est",
-    "69": "Auvergne-Rhône-Alpes",
-    "70": "Bourgogne-Franche-Comté",
-    "71": "Bourgogne-Franche-Comté",
-    "72": "Pays de la Loire",
-    "73": "Auvergne-Rhône-Alpes",
-    "74": "Auvergne-Rhône-Alpes",
-    "75": "Île-de-France",
-    "76": "Normandie",
-    "77": "Île-de-France",
-    "78": "Île-de-France",
-    "79": "Nouvelle-Aquitaine",
-    "80": "Hauts-de-France",
-    "81": "Occitanie",
-    "82": "Occitanie",
-    "83": "Provence-Alpes-Côte d'Azur",
-    "84": "Provence-Alpes-Côte d'Azur",
-    "85": "Pays de la Loire",
-    "86": "Nouvelle-Aquitaine",
-    "87": "Nouvelle-Aquitaine",
-    "88": "Grand Est",
-    "89": "Bourgogne-Franche-Comté",
-    "90": "Bourgogne-Franche-Comté",
-    "91": "Île-de-France",
-    "92": "Île-de-France",
-    "93": "Île-de-France",
-    "94": "Île-de-France",
-    "95": "Île-de-France",
-    "20": "Corse",
-    "2A": "Corse",
-    "2B": "Corse",
-  };
-
-  const domTomCodes = [
-    "971", "972", "973", "974", "975", "976", "977", "978", "984", "986", "987", "988"
-  ];
-
-  async function loadData() {
-    [basilicData, departementsGeo, regionsGeo] = await Promise.all([
-      d3.json("/assets/basilic_clean.json"),
-      d3.json("/assets/departements.json"),
-      d3.json("/assets/regions.json"),
-    ]);
-
-    departementsGeo.features = departementsGeo.features.filter((feature) => {
-      const code = feature.properties.code || feature.properties.CODE;
-      return !domTomCodes.includes(String(code));
-    });
-
-    regionsGeo.features = regionsGeo.features.filter((feature) => {
-      const nom = feature.properties.nom || feature.properties.NOM;
-      const regionsOM = ["Guadeloupe", "Martinique", "Guyane", "La Réunion", "Mayotte"];
-      return !regionsOM.includes(nom);
-    });
-  }
-
-  function aggregateData(granularite: string) {
-    const dataMap = new Map();
-
-    basilicData.forEach((item) => {
-      if (item.code_postal && item.code_postal !== "Code_Postal") {
-        const codePostal = String(item.code_postal).trim();
-
-        if (!/^\d{5}$/.test(codePostal)) {
-          return;
-        }
-
-        const deptCode = codePostal.substring(0, 2);
-
-        if (domTomCodes.some((domtom) => codePostal.startsWith(domtom.substring(0, 2)))) {
-          return;
-        }
-
-        let key;
-        if (granularite === "Départements") {
-          key = deptCode;
-        } else {
-          key = departementToRegion[deptCode];
-          if (!key) {
-            return;
-          }
-        }
-
-        const count = dataMap.get(key) || 0;
-        dataMap.set(key, count + 1);
+    <style>
+      .carousel-item {
+        scroll-snap-align: start;
       }
-    });
 
-    return dataMap;
-  }
+      html {
+        scroll-behavior: smooth;
+      }
+    </style>
 
-  function createCarte(granularite: string, containerId: string) {
-    try {
-      const dataMap = aggregateData(granularite);
-      const geoData = granularite === "Départements" ? departementsGeo : regionsGeo;
+    <script>
+      import * as Plot from "@observablehq/plot";
+      import * as d3 from "d3";
 
-      const enrichedGeoJSON = {
-        ...geoData,
-        features: geoData.features.map((feature) => {
-          let key;
-          if (granularite === "Départements") {
-            key = String(feature.properties.code || feature.properties.CODE);
-          } else {
-            key =
-              feature.properties.nom ||
-              feature.properties.NOM ||
-              feature.properties.name ||
-              feature.properties.NAME;
-          }
+      let basilicData, departementsGeo, regionsGeo;
 
-          return {
-            ...feature,
-            properties: {
-              ...feature.properties,
-              nombre_lieux: dataMap.get(key) || 0,
-            },
-          };
-        }),
+      const departementToRegion = {
+        "01": "Auvergne-Rhône-Alpes",
+        "02": "Hauts-de-France",
+        "03": "Auvergne-Rhône-Alpes",
+        "04": "Provence-Alpes-Côte d'Azur",
+        "05": "Provence-Alpes-Côte d'Azur",
+        "06": "Provence-Alpes-Côte d'Azur",
+        "07": "Auvergne-Rhône-Alpes",
+        "08": "Grand Est",
+        "09": "Occitanie",
+        "10": "Grand Est",
+        "11": "Occitanie",
+        "12": "Occitanie",
+        "13": "Provence-Alpes-Côte d'Azur",
+        "14": "Normandie",
+        "15": "Auvergne-Rhône-Alpes",
+        "16": "Nouvelle-Aquitaine",
+        "17": "Nouvelle-Aquitaine",
+        "18": "Centre-Val de Loire",
+        "19": "Nouvelle-Aquitaine",
+        "21": "Bourgogne-Franche-Comté",
+        "22": "Bretagne",
+        "23": "Nouvelle-Aquitaine",
+        "24": "Nouvelle-Aquitaine",
+        "25": "Bourgogne-Franche-Comté",
+        "26": "Auvergne-Rhône-Alpes",
+        "27": "Normandie",
+        "28": "Centre-Val de Loire",
+        "29": "Bretagne",
+        "30": "Occitanie",
+        "31": "Occitanie",
+        "32": "Occitanie",
+        "33": "Nouvelle-Aquitaine",
+        "34": "Occitanie",
+        "35": "Bretagne",
+        "36": "Centre-Val de Loire",
+        "37": "Centre-Val de Loire",
+        "38": "Auvergne-Rhône-Alpes",
+        "39": "Bourgogne-Franche-Comté",
+        "40": "Nouvelle-Aquitaine",
+        "41": "Centre-Val de Loire",
+        "42": "Auvergne-Rhône-Alpes",
+        "43": "Auvergne-Rhône-Alpes",
+        "44": "Pays de la Loire",
+        "45": "Centre-Val de Loire",
+        "46": "Occitanie",
+        "47": "Nouvelle-Aquitaine",
+        "48": "Occitanie",
+        "49": "Pays de la Loire",
+        "50": "Normandie",
+        "51": "Grand Est",
+        "52": "Grand Est",
+        "53": "Pays de la Loire",
+        "54": "Grand Est",
+        "55": "Grand Est",
+        "56": "Bretagne",
+        "57": "Grand Est",
+        "58": "Bourgogne-Franche-Comté",
+        "59": "Hauts-de-France",
+        "60": "Hauts-de-France",
+        "61": "Normandie",
+        "62": "Hauts-de-France",
+        "63": "Auvergne-Rhône-Alpes",
+        "64": "Nouvelle-Aquitaine",
+        "65": "Occitanie",
+        "66": "Occitanie",
+        "67": "Grand Est",
+        "68": "Grand Est",
+        "69": "Auvergne-Rhône-Alpes",
+        "70": "Bourgogne-Franche-Comté",
+        "71": "Bourgogne-Franche-Comté",
+        "72": "Pays de la Loire",
+        "73": "Auvergne-Rhône-Alpes",
+        "74": "Auvergne-Rhône-Alpes",
+        "75": "Île-de-France",
+        "76": "Normandie",
+        "77": "Île-de-France",
+        "78": "Île-de-France",
+        "79": "Nouvelle-Aquitaine",
+        "80": "Hauts-de-France",
+        "81": "Occitanie",
+        "82": "Occitanie",
+        "83": "Provence-Alpes-Côte d'Azur",
+        "84": "Provence-Alpes-Côte d'Azur",
+        "85": "Pays de la Loire",
+        "86": "Nouvelle-Aquitaine",
+        "87": "Nouvelle-Aquitaine",
+        "88": "Grand Est",
+        "89": "Bourgogne-Franche-Comté",
+        "90": "Bourgogne-Franche-Comté",
+        "91": "Île-de-France",
+        "92": "Île-de-France",
+        "93": "Île-de-France",
+        "94": "Île-de-France",
+        "95": "Île-de-France",
+        "20": "Corse",
+        "2A": "Corse",
+        "2B": "Corse",
       };
 
-      const maxValue = Math.max(
-        ...enrichedGeoJSON.features.map((f) => f.properties.nombre_lieux)
-      );
+      const domTomCodes = [
+        "971",
+        "972",
+        "973",
+        "974",
+        "975",
+        "976",
+        "977",
+        "978",
+        "984",
+        "986",
+        "987",
+        "988",
+      ];
 
-      const plot = Plot.plot({
-        width: 800,
-        height: 500,
-        projection: { type: "mercator", domain: enrichedGeoJSON },
-        color: {
-          type: "sequential",
-          scheme: "YlGnBu",
-          legend: true,
-          label: `Nombre de lieux`,
-          domain: [0, maxValue],
-        },
-        marks: [
-          Plot.geo(enrichedGeoJSON, {
-            fill: (d) => d.properties.nombre_lieux,
-            stroke: "#666",
-            strokeWidth: granularite === "Départements" ? 0.5 : 1,
-            title: (d) => {
-              const nom =
-                d.properties.nom ||
-                d.properties.NOM ||
-                d.properties.name ||
-                d.properties.NAME;
-              return `${nom}\nLieux: ${d.properties.nombre_lieux}`;
+      async function loadData() {
+        [basilicData, departementsGeo, regionsGeo] = await Promise.all([
+          d3.json("/assets/basilic_clean.json"),
+          d3.json("/assets/departements.json"),
+          d3.json("/assets/regions.json"),
+        ]);
+
+        departementsGeo.features = departementsGeo.features.filter(
+          (feature) => {
+            const code = feature.properties.code || feature.properties.CODE;
+            return !domTomCodes.includes(String(code));
+          }
+        );
+
+        regionsGeo.features = regionsGeo.features.filter((feature) => {
+          const nom = feature.properties.nom || feature.properties.NOM;
+          const regionsOM = [
+            "Guadeloupe",
+            "Martinique",
+            "Guyane",
+            "La Réunion",
+            "Mayotte",
+          ];
+          return !regionsOM.includes(nom);
+        });
+      }
+
+      function aggregateData(granularite: string) {
+        const dataMap = new Map();
+
+        basilicData.forEach((item) => {
+          if (item.code_postal && item.code_postal !== "Code_Postal") {
+            const codePostal = String(item.code_postal).trim();
+
+            if (!/^\d{5}$/.test(codePostal)) {
+              return;
+            }
+
+            const deptCode = codePostal.substring(0, 2);
+
+            if (
+              domTomCodes.some((domtom) =>
+                codePostal.startsWith(domtom.substring(0, 2))
+              )
+            ) {
+              return;
+            }
+
+            let key;
+            if (granularite === "Départements") {
+              key = deptCode;
+            } else {
+              key = departementToRegion[deptCode];
+              if (!key) {
+                return;
+              }
+            }
+
+            const count = dataMap.get(key) || 0;
+            dataMap.set(key, count + 1);
+          }
+        });
+
+        return dataMap;
+      }
+
+      function createCarte(granularite: string, containerId: string) {
+        try {
+          const dataMap = aggregateData(granularite);
+          const geoData =
+            granularite === "Départements" ? departementsGeo : regionsGeo;
+
+          const enrichedGeoJSON = {
+            ...geoData,
+            features: geoData.features.map((feature) => {
+              let key;
+              if (granularite === "Départements") {
+                key = String(
+                  feature.properties.code || feature.properties.CODE
+                );
+              } else {
+                key =
+                  feature.properties.nom ||
+                  feature.properties.NOM ||
+                  feature.properties.name ||
+                  feature.properties.NAME;
+              }
+
+              return {
+                ...feature,
+                properties: {
+                  ...feature.properties,
+                  nombre_lieux: dataMap.get(key) || 0,
+                },
+              };
+            }),
+          };
+
+          const maxValue = Math.max(
+            ...enrichedGeoJSON.features.map((f) => f.properties.nombre_lieux)
+          );
+
+          const plot = Plot.plot({
+            width: 800,
+            height: 500,
+            projection: { type: "mercator", domain: enrichedGeoJSON },
+            color: {
+              type: "sequential",
+              scheme: "YlGnBu",
+              legend: true,
+              label: `Nombre de lieux`,
+              domain: [0, maxValue],
             },
-            tip: true,
-          }),
-        ],
+            marks: [
+              Plot.geo(enrichedGeoJSON, {
+                fill: (d) => d.properties.nombre_lieux,
+                stroke: "#666",
+                strokeWidth: granularite === "Départements" ? 0.5 : 1,
+                title: (d) => {
+                  const nom =
+                    d.properties.nom ||
+                    d.properties.NOM ||
+                    d.properties.name ||
+                    d.properties.NAME;
+                  return `${nom}\nLieux: ${d.properties.nombre_lieux}`;
+                },
+                tip: true,
+              }),
+            ],
+          });
+
+          const container = document.getElementById(containerId);
+          if (container) {
+            container.innerHTML = "";
+            container.appendChild(plot);
+          }
+        } catch (error) {
+          console.error("Erreur:", error);
+          const container = document.getElementById(containerId);
+          if (container) {
+            container.innerHTML = `<div class="alert alert-error"><span>Erreur: ${error.message}</span></div>`;
+          }
+        }
+      }
+
+      async function init() {
+        await loadData();
+        createCarte("Départements", "carte-departements");
+        createCarte("Régions", "carte-regions");
+      }
+
+      // Keyboard navigation
+      document.addEventListener("keydown", (e: KeyboardEvent) => {
+        const currentSlide = window.location.hash || "#slide1";
+        const slideNumber = parseInt(currentSlide.replace("#slide", "")) || 1;
+
+        if (e.key === "ArrowRight") {
+          const nextSlide = slideNumber < 2 ? slideNumber + 1 : 1;
+          window.location.hash = `slide${nextSlide}`;
+        } else if (e.key === "ArrowLeft") {
+          const prevSlide = slideNumber > 1 ? slideNumber - 1 : 2;
+          window.location.hash = `slide${prevSlide}`;
+        }
       });
 
-      const container = document.getElementById(containerId);
-      if (container) {
-        container.innerHTML = "";
-        container.appendChild(plot);
+      // Update active indicator
+      function updateIndicators() {
+        const currentSlide = window.location.hash || "#slide1";
+        const indicators = document.querySelectorAll(
+          ".flex.justify-center .btn-xs"
+        );
+
+        indicators.forEach((indicator) => {
+          const link = indicator as HTMLAnchorElement;
+          if (link.getAttribute("href") === currentSlide) {
+            link.classList.add("btn-primary");
+            link.classList.remove("btn-ghost");
+          } else {
+            link.classList.remove("btn-primary");
+            link.classList.add("btn-ghost");
+          }
+        });
       }
-    } catch (error) {
-      console.error("Erreur:", error);
-      const container = document.getElementById(containerId);
-      if (container) {
-        container.innerHTML = `<div class="alert alert-error"><span>Erreur: ${error.message}</span></div>`;
-      }
-    }
-  }
 
-  async function init() {
-    await loadData();
-    createCarte("Départements", "carte-departements");
-    createCarte("Régions", "carte-regions");
-  }
-
-  // Keyboard navigation
-  document.addEventListener("keydown", (e: KeyboardEvent) => {
-    const currentSlide = window.location.hash || "#slide1";
-    const slideNumber = parseInt(currentSlide.replace("#slide", "")) || 1;
-
-    if (e.key === "ArrowRight") {
-      const nextSlide = slideNumber < 2 ? slideNumber + 1 : 1;
-      window.location.hash = `slide${nextSlide}`;
-    } else if (e.key === "ArrowLeft") {
-      const prevSlide = slideNumber > 1 ? slideNumber - 1 : 2;
-      window.location.hash = `slide${prevSlide}`;
-    }
-  });
-
-  // Update active indicator
-  function updateIndicators() {
-    const currentSlide = window.location.hash || "#slide1";
-    const indicators = document.querySelectorAll('.flex.justify-center .btn-xs');
-    
-    indicators.forEach((indicator) => {
-      const link = indicator as HTMLAnchorElement;
-      if (link.getAttribute('href') === currentSlide) {
-        link.classList.add('btn-primary');
-        link.classList.remove('btn-ghost');
+      // Initialize
+      if (document.readyState === "loading") {
+        document.addEventListener("DOMContentLoaded", () => {
+          init();
+          updateIndicators();
+          window.addEventListener("hashchange", updateIndicators);
+        });
       } else {
-        link.classList.remove('btn-primary');
-        link.classList.add('btn-ghost');
+        init();
+        updateIndicators();
+        window.addEventListener("hashchange", updateIndicators);
       }
-    });
-  }
-
-  // Initialize
-  if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", () => {
-      init();
-      updateIndicators();
-      window.addEventListener('hashchange', updateIndicators);
-    });
-  } else {
-    init();
-    updateIndicators();
-    window.addEventListener('hashchange', updateIndicators);
-  }
-</script>
+    </script>
+  </div>
 </Layout>
